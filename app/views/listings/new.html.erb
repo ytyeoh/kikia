@@ -1,4 +1,3 @@
-<%= render 'geo_complete' %>
 <div class="page-header">
   <%= link_to listings_path, class: 'btn btn-default', 'data-no-turbolink' => true do %>
     <span class="glyphicon glyphicon-list-alt"></span>
@@ -8,21 +7,3 @@
 </div>
 
 <%= render 'form' %>
-<script type="text/javascript">
-$("#special").geocomplete({
-  map: "#map",
-  mapOptions: {
-    zoom: 6,
-    scrollwheel: true
-  },
-  location: "<%= current_user.stage %>",
-  markerOptions: {
-    draggable: true
-  },
-  details: "#special"
-});
-$("#special").bind("geocode:dragged", function(event, latLng){
-  $("#latitude").val(latLng.lat());
-  $("#longitude").val(latLng.lng());
-});
-</script>

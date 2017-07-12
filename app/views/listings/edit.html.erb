@@ -14,23 +14,3 @@
 </div>
 
 <%= render 'form' %>
-
-<%= render 'geo_complete' %>
-<script type="text/javascript">
-$("#special").geocomplete({
-    map: "#map",
-    mapOptions: {
-      zoom: 18,
-      scrollwheel: true
-    },
-    location:  [<%= @listing.latitude %>, <%= @listing.longitude %>] ,
-    markerOptions: {
-      draggable: true
-    },
-    details: "form"
-  });
-$("#special").bind("geocode:dragged", function(event, latLng){
-  $("#latitude").val(latLng.lat());
-  $("#longitude").val(latLng.lng());
-});
-</script>

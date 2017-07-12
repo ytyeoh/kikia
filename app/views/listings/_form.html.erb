@@ -47,11 +47,6 @@
 
       <%= f.text_field :address, class: "validate", id: "special"%>
     </div>
-    <div class="col s12">
-      <div style='width: 90%;'>
-      <div id="map" style='width: 90%; height: 400px;'></div>
-      </div>
-    </div>
 
     <h5>Information</h5>
     <div class="input-field col s12">
@@ -108,27 +103,5 @@
   
 <% end %>
 </div>
-<script>
-  var listingSlider = document.getElementById('listing');
-  var value = document.getElementById('listing_price').value;
-
-  noUiSlider.create(listingSlider, {
-    start: [ value ],
-    range: {
-      'min': 500,
-      'max': 2500
-    },
-    margin: 50,
-    step: 50
-  });
-
-  var price = document.getElementById('listing_price');
-
-  listingSlider.noUiSlider.on('update', function( values, handle ) {
-
-    var value = values[handle];
-      price.value = Math.round(value);
-  });
-</script>
 
 <%= render 'drop' %>
