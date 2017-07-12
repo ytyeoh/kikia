@@ -44,10 +44,8 @@
     </p>
     <div class="input-field col s12">
       <label class="active" for="special">address</label>
-      <%= f.hidden_field :latitude, id: "latitude" %>
-      <%= f.hidden_field :longitude, id: "longitude" %>
-      <%= hidden_field_tag 'city', request.location.city %>
-      <%= f.text_field :address, class: "validate", id: "special", placeholder: "#{request.location.city}"%>
+
+      <%= f.text_field :address, class: "validate", id: "special"%>
     </div>
     <div class="col s12">
       <div style='width: 90%;'>
