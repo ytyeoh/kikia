@@ -17,10 +17,9 @@
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
 //= require underscore
-//= require gmaps/google
+//= require select2
 //= require dropzone
 //= require application/global_event
-//= require geocomplete
 //= require typeahead
 //= require turbolinks
 //= require_tree .
@@ -40,4 +39,23 @@ $(document).ready(function(){
   $('.slider').slider({height: 200, interval: 3000, indicators: false});
 });
 
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
 
+    reader.onload = function (e) {
+      $('#img_prev')
+        .attr('src', e.target.result)
+        .removeClass('hide')
+        .height(165)
+        .width(165);
+      $('.icon_img').addClass('hide');
+      $('.image')
+        .css('background-image', 'url("' + e.target.result + '")');
+            }
+
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  
+};

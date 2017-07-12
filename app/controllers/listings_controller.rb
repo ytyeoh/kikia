@@ -44,7 +44,6 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
-    @geokey = ENV['GEOAPI']
   end
 
   # POST /listings

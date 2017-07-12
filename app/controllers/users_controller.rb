@@ -42,7 +42,18 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update_attributes(user_params)
+        if params[:images]
+          @uploaded_images = params[:images]
+          @uploaded_images.each { |image, object|
+            @user.vehicle.vehicle_images.create(image: object)
+          }
+        end
+        if params[:delete_images]
+          params[:delete_images].each { |id|
+            VehicleImage.find(id).destroy
+          }
+        end
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -84,6 +95,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :identity_card, :stage, :image, :contact)
+      params.require(:user).permit(:name, :email, :identity_card, :stage, :image, :contact, vehicle_attributes:[:id, :brand, :model, :seat, images:[]])
     end
 end
