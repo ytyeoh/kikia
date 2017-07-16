@@ -42,6 +42,7 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 gem 'whenever', :require => false
 gem "select2-rails"
+gem "rolify"
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production

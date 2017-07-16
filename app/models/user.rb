@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -30,6 +31,10 @@ class User < ActiveRecord::Base
   def code_generate
     o = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
     self.code = (0...8).map { o[rand(o.length)] }.join
+  end
+
+  def is_admin?
+    self.has_role? :admin
   end
 
   protected
