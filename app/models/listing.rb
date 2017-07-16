@@ -3,6 +3,7 @@ class Listing < ActiveRecord::Base
 	has_many :favorite_listings
 	has_many :credit_records
 	has_many :pictures, :dependent => :destroy
+	has_many :bookings
 	searchkick autocomplete: ['city']
 	paginates_per 10
 	# attr_accessible :address, :latitude, :longitude

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :vehicle
   has_many :raters, through: :reviews, class_name: "User", foreign_key: :user_id # The users this user has rated
   has_many :users, through: :reviews, class_name: "User", foreign_key: :reter_id
+  has_many :customers, through: :bookings, class_name: "User", foreign_key: :customer_id
+  has_many :owners, through: :bookings, class_name: "User", foreign_key: :owner_id
   has_many :user_credits
   has_attached_file :image,
     :styles => {
