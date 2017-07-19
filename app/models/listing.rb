@@ -18,7 +18,7 @@ class Listing < ActiveRecord::Base
 	# validates_attachment :image,
  #                     content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
- attr_accessor :time
+ attr_accessor :time, :begin_time, :duration
 	enum type: {'Free & Easy': 1, 'Air Port Transfer': 2}
 	enum property: { landed: 1, 'High Rise': 2, other: 3 }
 	enum furnished: { fully: 1, partialy: 2, basic: 3 }

@@ -21,12 +21,22 @@
   <% end %>
 
 
-    
+
+    <h5>Time</h5>
 
     <div class="input-field col s12">
-      <%= f.label :time %>
-      <div id="listing"></div>
-      <%= f.number_field :time %>
+      <%= f.label :duration, class: "active" %>
+      <%= f.select(:duration, (4..12).step(1).to_a.map{|s| ["#{s} Hours", s]}) %>
+    </div>
+
+    <div class="input-field col s12">
+      <%= f.label :begin_time, class: "active" %>
+      <%= f.date_field :begin_time, class: "datepicker" %>
+    </div>
+
+    <div class="input-field col s12">
+      <%= f.label :time, class: "active" %>
+      <%= f.text_field :time, class: "timepicker" %>
     </div>
 
     <div id="image"></div>
@@ -55,16 +65,3 @@
 </div>
 
 <%= render 'drop' %>
-<script>
-  function ChangeContext(value){
-    if (value == 1)
-    {
-      var out = '<div id="type">sdfsdf</div>'
-    } else if (value == 2){
-      var out = '<div>ereteryg</div>'
-    } else if (value == 3){
-      var out = ''
-    }
-    document.getElementById('type').innerHTML = out
-  }
-</script>
