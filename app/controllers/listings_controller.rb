@@ -52,6 +52,8 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id
     @listing.published_at = DateTime.now
+    @Listing.schedule = IceCube::Schedule.new(params[:begin_time], duration: params[:duration].hours)
+    @Listing.schedule.add_recurrence_rule IceCube::Rule.daily.hour_of_day(params[:time])
     respond_to do |format|
       if @listing.save
         if params[:images]
@@ -135,6 +137,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :desc, :price, :address, :latitude, :longitude, :token, :coin, :published_at, :images, :imove_in, :property, :furnished, :area, :parking, :bathroom, :bedroom, :hide)
+      params.require(:listing).permit(:name, :desc, :price, :address, :latitude, :longitude, :token, :coin, :published_at, :images, :imove_in, :property, :furnished, :area, :parking, :bathroom, :bedroom, :hide, :type)
     end
 end

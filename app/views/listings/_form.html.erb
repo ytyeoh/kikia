@@ -12,72 +12,22 @@
       </ul>
     </div>
   <% end %>
+  <% if @listing.type == 1 %>
+    <%= render 'easy_form', :f => f %>
+  <% elsif @listing.type == 2 %>
+    <%= render 'air_form', :f => f %>
+  <% else %>
+    <%= render 'new_form', :f => f %>
+  <% end %>
 
-    <h5>Package</h5>
-    <div class="input-field col s12">
-      <%= f.label :name, class: "active" %>
-      <%= f.text_field :name, class: "validate" %>
-    </div>
+
+    
 
     <div class="input-field col s12">
-      <%= f.label :desc, class: "active" %>
-      <%= f.text_field :desc, class: "validate" %>
-    </div>
-    <h5>Price</h5>
-    <div class="input-field col s12">
-      <%= f.label :price %>
+      <%= f.label :time %>
       <div id="listing"></div>
-      <%= f.number_field :price, class: "validate col s12 number-input", value: 600 %>
+      <%= f.number_field :time %>
     </div>
-
-
-      <p>
-        <%= f.check_box :imove_in %>
-        <label for="listing_imove_in">Instant Move In</label>
-      </p>
-
-    
-    <h5>Location</h5>
-    <p>
-      <%= f.check_box :hide %>
-      <label for="listing_hide">Hide Address</label>
-    </p>
-    <div class="input-field col s12">
-      <label class="active" for="special">Place</label>
-
-      <%= f.text_field :address, class: "validate", id: "special"%>
-    </div>
-
-    <h5>Vehicle</h5>
-    <div class="input-field col s12">
-      <%= f.label :bedroom, class: "active" %>
-      <%= f.text_field :bedroom, class: "validate" %>
-    </div>
-
-    <div class="input-field col s12">
-      <%= f.label :bathroom, class: "active" %>
-      <%= f.text_field :bathroom, class: "validate" %>
-    </div>
-
-    <div class="input-field col s12">
-      <%= f.label :car_park, class: "active" %>
-      <%= f.text_field :parking, class: "validate" %>
-    </div>
-
-    <div class="input-field col s12">
-      <%= f.label :area, class: "active" %>
-      <%= f.text_field :area, class: "validate" %>
-    </div>
-    
-    <div class="input-field col s12">
-      <%= f.label :furnished, class: "active" %>
-      <%= f.select(:furnished, Listing.furnisheds.keys) %>
-    </div>
-
-    <div class="input-field col s12">
-      <%= f.label :property, class: "active" %>
-      <%= f.select(:property, Listing.properties.keys)  %>
-    </div>  
 
     <div id="image"></div>
 
@@ -105,3 +55,16 @@
 </div>
 
 <%= render 'drop' %>
+<script>
+  function ChangeContext(value){
+    if (value == 1)
+    {
+      var out = '<div id="type">sdfsdf</div>'
+    } else if (value == 2){
+      var out = '<div>ereteryg</div>'
+    } else if (value == 3){
+      var out = ''
+    }
+    document.getElementById('type').innerHTML = out
+  }
+</script>

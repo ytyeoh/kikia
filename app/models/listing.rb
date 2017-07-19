@@ -1,9 +1,11 @@
 class Listing < ActiveRecord::Base
+	acts_as_bookable time_type: :range,
+								   capacity_type: :closed,
+                   bookable_across_occurrences: true
 	belongs_to :user
 	has_many :favorite_listings
 	has_many :credit_records
 	has_many :pictures, :dependent => :destroy
-	has_many :bookings
 	searchkick autocomplete: ['city']
 	paginates_per 10
 	# attr_accessible :address, :latitude, :longitude
@@ -16,8 +18,8 @@ class Listing < ActiveRecord::Base
 	# validates_attachment :image,
  #                     content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
-
-	
+ attr_accessor :time
+	enum type: {'Free & Easy': 1, 'Air Port Transfer': 2}
 	enum property: { landed: 1, 'High Rise': 2, other: 3 }
 	enum furnished: { fully: 1, partialy: 2, basic: 3 }
 end
