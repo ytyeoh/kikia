@@ -1,11 +1,11 @@
 <h5>Package</h5>
 
     <div class="input-field col s12">
-      <%= f.label :type, class: "active" %>
-      <%= f.select(:type, Listing.types, {}, :onchange=>"ChangeContext(this.value);") %>
+      <%= f.label :package, class: "active" %>
+      <%= f.select(:package, Listing.packages, {}, :onchange=>"ChangeContext(this.value);") %>
     </div>
 
-    <div id="type">
+    <div id="package">
 
       <div class="input-field col s12">
         <%= f.label :name, class: "active" %>
@@ -22,12 +22,6 @@
         <div id="listing"></div>
         <%= f.number_field :price, class: "validate col s12 number-input", value: 600 %>
       </div>
-
-
-        <p>
-          <%= f.check_box :imove_in %>
-          <label for="listing_imove_in">Instant Move In</label>
-        </p>
 
       <h5>Location</h5>
       <p>

@@ -12,9 +12,9 @@
       </ul>
     </div>
   <% end %>
-  <% if @listing.type == 1 %>
+  <% if @listing.package == 1 %>
     <%= render 'easy_form', :f => f %>
-  <% elsif @listing.type == 2 %>
+  <% elsif @listing.package == 2 %>
     <%= render 'air_form', :f => f %>
   <% else %>
     <%= render 'new_form', :f => f %>
@@ -31,7 +31,7 @@
 
     <div class="input-field col s12">
       <%= f.label :begin_time, class: "active" %>
-      <%= f.date_field :begin_time, class: "datepicker" %>
+      <%= f.datetime_local_field :begin_time, class: "datepicker" %>
     </div>
 
     <div class="input-field col s12">

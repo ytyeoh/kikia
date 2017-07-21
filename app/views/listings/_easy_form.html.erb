@@ -1,8 +1,8 @@
 <h5>Package</h5>
 
     <div class="input-field col s12">
-      <%= f.label :type, class: "active" %>
-      <%= f.select(:type, Listing.types, {}, :onchange=>"ChangeContext(this.value);") %>
+      <%= f.label :package, class: "active" %>
+      <%= f.select(:package, Listing.types, {}, :onchange=>"ChangeContext(this.value);") %>
     </div>
 
     <div id="type">
@@ -24,12 +24,6 @@
       </div>
 
 
-        <p>
-          <%= f.check_box :imove_in %>
-          <label for="listing_imove_in">Instant Move In</label>
-        </p>
-
-
       <h5>Location</h5>
       <p>
         <%= f.check_box :hide %>
@@ -42,34 +36,6 @@
       </div>
 
       <h5>Vehicle</h5>
-      <div class="input-field col s12">
-        <%= f.label :bedroom, class: "active" %>
-        <%= f.text_field :bedroom, class: "validate" %>
-      </div>
-
-      <div class="input-field col s12">
-        <%= f.label :bathroom, class: "active" %>
-        <%= f.text_field :bathroom, class: "validate" %>
-      </div>
-
-      <div class="input-field col s12">
-        <%= f.label :car_park, class: "active" %>
-        <%= f.text_field :parking, class: "validate" %>
-      </div>
-
-      <div class="input-field col s12">
-        <%= f.label :area, class: "active" %>
-        <%= f.text_field :area, class: "validate" %>
-      </div>
-
-      <div class="input-field col s12">
-        <%= f.label :furnished, class: "active" %>
-        <%= f.select(:furnished, Listing.furnisheds.keys) %>
-      </div>
-
-      <div class="input-field col s12">
-        <%= f.label :property, class: "active" %>
-        <%= f.select(:property, Listing.properties.keys)  %>
-      </div>
+      
 
     </div>
