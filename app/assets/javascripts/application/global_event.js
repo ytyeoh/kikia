@@ -3,6 +3,7 @@ var globalEvent = {
     this.flashAjax();
     this.likeUnlikeAjax();
     this.paymentHide();
+    this.totalPay();
   },
 
   flashAjax: function() {
@@ -65,5 +66,11 @@ var globalEvent = {
       targetFavCount.html(newFavCount);
       currentFavCount = newFavCount;
     });
+  },
+
+  totalPay: function() {
+    $('#travel_time').change(function(){
+      document.getElementById('travel_amount').value = $('#travel_amount')[0].defaultValue * this.value;
+    })
   }
 }

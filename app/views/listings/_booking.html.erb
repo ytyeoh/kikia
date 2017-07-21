@@ -1,0 +1,21 @@
+<%= form_tag("/listings/booking", class: "unlike-listing", remote: true, method: :post) do %>
+  <div class="input-field col s12">
+    <label class="active" for="special">Date</label>
+
+    <%= text_field_tag 'time_start', nil, class: "datepicker" %>
+  </div>
+  
+  <div class="input-field col s12">
+    <label class="active" for="special">Date</label>
+
+    <%= select_tag 'time', options_for_select((1..10).step(1).to_a.map{|s| ["#{s} Days", s]}), id: 'travel_time' %>
+  </div>
+  
+  <div class="input-field col s12">
+    <label class="active" for="special">Price</label>
+
+    <%= number_field_tag 'amount', @listing.price, disabled: true, id: 'travel_amount' %>
+  </div>
+  
+  <%= submit_tag 'order', class: 'btn' %>
+<% end %>
