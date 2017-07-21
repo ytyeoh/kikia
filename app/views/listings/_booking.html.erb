@@ -14,8 +14,8 @@
   <div class="input-field col s12">
     <label class="active" for="special">Price</label>
 
-    <%= number_field_tag 'amount', @listing.price, disabled: true, id: 'travel_amount' %>
+    <%= number_field_tag 'amount', @listing.price, readonly: true, id: 'travel_amount' %>
   </div>
   
-  <%= submit_tag 'order', class: 'btn' %>
+  <%= render 'payment_form' %>
 <% end %>

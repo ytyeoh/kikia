@@ -1,9 +1,16 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :braintree_token, only: [:booking]
+  skip_before_action :verify_authenticity_token, only: [:booking]
 
   # GET /listings
   # GET /listings.json
+
+  def braintree_token
+    @braintree_token = generate_client_token
+  end
+
   def index
     if params[:query].present?
       @listingss = Listing.search params[:query], fields: [:search_tags], where: {imove_in: params[:imove_in], price: {gte: params[:lower], lte: params[:higher]}}, order: {published_at: :desc,}
@@ -11,15 +18,12 @@ class ListingsController < ApplicationController
     else
       @listings = Listing.all.order("published_at DESC").page(params[:listing]).per(10)
     end
-    @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
-      marker.lat listing.latitude
-      marker.lng listing.longitude
-    end
   end
 
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @braintree_token = generate_client_token
     @credit = CreditRecord.new
     @listing = Listing.find(params[:id])
     @listing.search_tags << 'room rent' << 'house rent'
@@ -126,6 +130,29 @@ class ListingsController < ApplicationController
     render json: Listing.search(params[:query], autocomplete: true, limit: 10).map(&:city)
   end
 
+  def booking
+    @result = Braintree::Transaction.sale(amount: params[:amount],payment_method_nonce: params[:payment_method_nonce])
+byebug
+    if @result.success?
+      current_user.update(braintree_customer_id: @result.transaction.customer_details.id, credit: new_credit) unless current_user.has_payment_info?
+      current_user.save
+      
+      respond_to do |format|
+        if current_user.book! @listing, time_start: params[:time_start], time_end: (params[:time_start]+params[:time])
+          format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
+          format.json { render :show, status: :created, location: @listing }
+        else
+          format.html { render :show }
+          format.json { render json: @credit.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      flash[:alert] = "Something went wrong while processing your transaction. Please try again!"
+      gon.client_token = generate_client_token
+      redirect_to :back
+    end
+  end
+
   def owner
     @listings = Listing.where(user_id: current_user.id).order("published_at DESC").page params[:listing]
     @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
@@ -140,6 +167,16 @@ class ListingsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def generate_client_token
+      if current_user
+        if current_user.has_payment_info?
+          Braintree::ClientToken.generate
+        else
+          Braintree::ClientToken.generate
+        end
+      end
+    end
+
     def set_listing
       @listing = Listing.find(params[:id])
     end
