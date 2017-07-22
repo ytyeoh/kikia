@@ -44,6 +44,7 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new
+    @listing.capacity = current_user.vehicle.seat
   end
 
   # GET /listings/1/edit
@@ -56,18 +57,6 @@ class ListingsController < ApplicationController
     @listing = Listing.new(listing_params)
     @listing.user_id = current_user.id
     @listing.published_at = DateTime.now
-    duration = params[:listing][:duration].to_i
-    @listing.capacity = current_user.vehicle.seat
-    begin_time = DateTime.parse(params[:listing][:begin_time])
-    time = params[:listing][:time].scan(/\d+/).first
-    # if time[0] == '0'
-    #   time = time.slice!(1)
-    # end
-
-    @listing.schedule = IceCube::Schedule.new(begin_time, duration: duration.hours)
-
-    @listing.schedule.add_recurrence_rule IceCube::Rule.weekly.day(:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday).hour_of_day(params[:listing][:time].scan(/\d+/).first.to_i)
-
     respond_to do |format|
       if @listing.save
         if params[:images]
@@ -140,7 +129,7 @@ class ListingsController < ApplicationController
        
         start_time = Date.parse(params[:time_start]) + params[:meet_time].to_i.hours
         end_time = start_time + params[:time].to_i.days + @listing.time_duration.to_i.hours
-        byebug
+
         @booking = current_user.book! @listing, amount: 1, time_start: start_time, time_end: end_time
         
         if @booking
@@ -184,6 +173,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :desc, :price, :address, :latitude, :longitude, :token, :coin, :published_at, :images, :active, :hide, :package, :capacity, :time_duration)
+      params.require(:listing).permit(:name, :desc, :price, :address, :token, :coin, :published_at, :images, :active, :hide, :package, :capacity, :time_duration, :pick_up_time)
     end
 end

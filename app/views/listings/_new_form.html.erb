@@ -2,7 +2,7 @@
 
     <div class="input-field col s12">
       <%= f.label :package, class: "active" %>
-      <%= f.select(:package, Listing.packages, {}, :onchange=>"ChangeContext(this.value);") %>
+      <%= f.select(:package, Listing.packages.keys, {}, :onchange=>"ChangeContext(this.value);") %>
     </div>
 
     <div id="package">

@@ -1,10 +1,8 @@
 class Listing < ActiveRecord::Base
-	acts_as_bookable time_type: :range,
-								   capacity_type: :closed,
-                   bookable_across_occurrences: true
 	belongs_to :user
 	has_many :favorite_listings
 	has_many :credit_records
+	has_many :bookings
 	has_many :pictures, :dependent => :destroy
 	searchkick autocomplete: ['city']
 	paginates_per 10

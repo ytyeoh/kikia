@@ -31,7 +31,7 @@
 
     <div class="input-field col s12">
       <%= f.label :capacity, 'Max Passenger', class: "active" %>
-      <%= f.select(:capacity, (3..16).step(1).to_a.map{|s| ["#{s} passengers", s]}, current_user.vehicle.seat) %>
+      <%= f.select(:capacity, (3..16).step(1).to_a.map{|s| ["#{s} passengers", s]}) %>
     </div>
 
     <div class="input-field col s12"
