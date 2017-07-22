@@ -170,7 +170,7 @@ byebug
     def generate_client_token
       if current_user
         if current_user.has_payment_info?
-          Braintree::ClientToken.generate
+          Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
         else
           Braintree::ClientToken.generate
         end

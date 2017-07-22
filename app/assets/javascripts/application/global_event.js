@@ -70,7 +70,6 @@ var globalEvent = {
 
   totalPay: function() {
     $('#travel_time').change(function(){
-      debugger;
       document.getElementById('travel_amount').value = $('#travel_amount')[0].defaultValue * this.value;
     })
   }
