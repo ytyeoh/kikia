@@ -1,0 +1,60 @@
+.first-body{
+  margin-top:80px;
+}
+
+
+
+.circle-border{
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  border: 1px solid $white;    
+  text-align: center;
+  margin-left: 10px;
+  color: $white;
+}
+
+.circle-border.circle-border-lg {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    font-size: 1.5em;
+}
+
+.circle-border:hover{
+  background-color: $white;
+  color: $dark-green;
+  }
+
+.padding-zero{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.center-img{
+  height: 100%;
+  margin-top: 20%;
+  margin-bottom: 20%;
+}
+
+.dz-progress{
+  display: none !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+@media only screen and (max-width: 600px){
+  #toast-container  {
+    min-width: 100%;
+    top: 0%;
+  }
+}

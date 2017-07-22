@@ -1,0 +1,8 @@
+$('#listing-item').append('<%= escape_javascript render partial: 'fav_item', collection: @listings.page(params[:listing]), as: :listing, :window => 2%>');
+$('.slider').slider({height: 200, interval: 3000, indicators: false});
+<% if @listings.next_page %>
+  $('#listing-num').append('<%= escape_javascript(paginate(@listings.page(params[:listing]), :remote => true, param_name: 'listing').to_s) %>');
+<% else %>
+  $(window).off('scroll');
+  $('#listing-num').html('No More Rooms');
+<% end %>

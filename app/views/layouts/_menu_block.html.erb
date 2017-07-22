@@ -1,0 +1,11 @@
+<%= link_to current_user.name, edit_user_path(current_user.id) %>
+<% if current_user.credit == 0 || current_user.nil? %>
+  <%= link_to credit_users_path do %>
+    <b>Top Up</b>
+  <% end %>
+<% else %>
+  <%= link_to credit_users_path do %>
+    <div class="dark-green-text"><b>Credit: <%= current_user.credit %></b></div>
+    
+  <% end %>
+<% end %>

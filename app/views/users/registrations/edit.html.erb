@@ -1,0 +1,42 @@
+<h2>Change Password</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="input-field col s8">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="input-field col s8">
+    <%= f.label :password, class: "active" %>
+    <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "validate" %>
+  </div>
+
+  <div class="input-field col s8">
+    <%= f.label :password_confirmation, "Confirm new password", class: "active" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "validate"%>
+  </div>
+
+
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  
+
+  <div class="actions">
+    <%= f.submit "Update", class: "btn waves-effect waves-light" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+<div class="row">
+  <div class="col s6">
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn waves-effect waves-light red" %>
+  </div>
+  <div class="col s6">
+    <%= link_to "Back", :back, class: "btn waves-effect waves-light" %>
+  </div>
+</div>

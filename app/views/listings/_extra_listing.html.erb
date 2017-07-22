@@ -1,0 +1,19 @@
+<%= link_to listing do %>
+  <div class="col s12 m6 ">
+    <div class="card">
+      <div class="card-image slider">
+        <ul class="slides">
+          <% listing.pictures.each do |image| %>
+            <li>
+              <%= image_tag image.image, class:'responsive-img' %>
+            </li>
+          <% end %>
+        </ul>
+        <span class="card-title"><%= listing.name %></span>
+      </div>
+      <div class="card-content">
+        <p>RM<%= listing.price %></p>
+      </div>
+    </div>
+  </div>
+<% end %>

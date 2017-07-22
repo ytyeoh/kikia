@@ -1,0 +1,30 @@
+<div class="st-list">
+  <%= link_to "", '#fb-share', class: "fb-share fa fa-facebook", onclick: "fb_share();" %>
+  <%= link_to "", '#tw-share', class: "fa fa-twitter", onclick: "share(\'http://twitter.com/intent/tweet?status=Hey, join me at +#{root_url}\', 600, 500); return false;" %>
+  <%= link_to "", '#pin-share', class: "fa fa-pinterest-p", onclick: "share(\'http://pinterest.com/pin/create/button/?url=#{request.original_url}&media=#{image_url "og-image.png"}&description=Hey, join me at +#{root_url}\', 600, 500); return false;" %>
+  <%= link_to '', "mailto:?Subject=Welcome%20To%20MoneyHomel&body=Hey,%20join%20me%20at%20#{root_url}", class: "fa fa-envelope-o" %>
+</div>
+
+<script type="text/javascript">
+  var share = function(provider_url, width, height) {
+    var screenX     = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft,
+        screenY     = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop,
+        outerWidth  = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth,
+        outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22),
+        left        = parseInt(screenX + ((outerWidth - width) / 2), 10),
+        top         = parseInt(screenY + ((outerHeight - height) / 2.5), 10),
+        features    = ('width=' + width + ',height=' + height + ',left=' + left + ',top=' + top);
+        newwindow = window.open(provider_url, 'Share', features);
+    if (window.focus)
+      newwindow.focus();
+    return false;
+  }
+  function fb_share() {
+    FB.ui({
+      method: 'feed',
+      link: "http://stayfavful.com/<%= request.path %>",
+      caption: 'Hey, join me at stayfavful.com',
+      redirect_uri: "http://stayfavful.com/"
+    }, function(response){});
+  }
+</script>

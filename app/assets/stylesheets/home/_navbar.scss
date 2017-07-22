@@ -1,0 +1,38 @@
+nav .brand-logo.left {
+  left: 0.5rem;
+  padding: 0;
+}
+
+nav .button-collapse.right{
+  right: 0.5rem;
+  pading: 0;
+}
+
+nav .input-field.center{
+  left: 80%;
+  transform: translateX(-50%);
+}
+
+.col.s4.number-input{
+  margin-top: 20px;
+  font-size: 1.2 rem;
+  text-align: center;
+}
+
+nav .card-panel{
+  padding: 0;
+}
+
+.side-nav a{
+  padding: 0!important;
+}
+
+@media only screen and (min-width: 992px){
+  .side-nav{
+    .menu-li{
+      position: fixed;
+      bottom: 60px;
+      width: 100%;
+    }
+  }
+}

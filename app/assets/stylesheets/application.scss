@@ -1,0 +1,29 @@
+
+
+@import "materialize/components/color";
+@import "main";
+@import "materialize";
+@import "materialize/extras/nouislider";
+@import "material_icons";
+@import "dropzone/basic";
+@import "font-awesome";
+@import "select2";
+
+ 
+
+body{
+  text-align: center;
+}
+
+#toast-container .toast {
+    cursor: pointer;
+}
+#toast-container span {
+    -webkit-font-feature-settings: 'liga';
+    color: #dd2c00;
+    font-size: 1.5rem;
+    font-weight: 300;
+    float: right;
+    padding-left: 3rem;
+    word-break: keep-all;
+}

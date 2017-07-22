@@ -1,0 +1,5 @@
+<%= form_for(@credit, html: { class: "form-horizontal", role: "form", onsubmit: "return confirm('7 credit will deduct from your account for highlight listing.');" }) do |f| %>
+  <%= f.hidden_field :type , :value => 'coin' %>
+  <%= f.hidden_field :listing_id , :value => @listing.id %>
+  <%= f.submit "Highlight 7 Days",  class: "btn btn-primary" %>
+<% end %>

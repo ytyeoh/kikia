@@ -1,0 +1,20 @@
+<div class="card-panel teal black-text padding-bottom2rem <%= credit_counter%2 != 1 ? 'white-text' : 'lighten-4 black-text' %>">
+  <%= link_to credit_record_path(credit.id, :format => :pdf) do %>
+  <div class="col s12 m4">
+    Purchase Time: <%= credit.created_at.localtime.strftime("%Y-%m-%d %I:%M %p") %>
+  </div>
+  <div class="col s12 m4">
+    Type: <%= credit.item.capitalize %>
+  </div>
+  <div class="col s12 m4">
+    <div class="row">
+      <div class="col s6">
+        Balance Credit: <%= credit.balance %>
+      </div>
+      <div class="col s6">
+        Credit Before: <%= credit.credit %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

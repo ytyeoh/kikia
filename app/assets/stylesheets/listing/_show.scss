@@ -1,0 +1,74 @@
+.listing-show{
+  text-align: left;
+  color: $grey;
+  .s8, .s3, .s1{
+    margin-bottom: 1rem;
+    }
+  h1{
+    margin: 0;
+  }
+  p{
+    margin: 0;
+  }
+
+  .card-title{
+    z-index: 9;
+  }
+
+  .desc{
+    margin: 3rem 0;
+  }
+
+  .price{
+    color: red;
+    span{
+      font-size: 2rem;
+    }
+  }
+
+  .owner{
+    margin-top: 1rem;
+
+    a{
+      font-size: 1rem;
+    }
+  }
+  
+}
+
+.image-li {
+  display: inline-block;
+}
+
+.image-li img, .image-li a {
+  display: block;
+  margin: auto;
+  padding: 0.2rem;
+}
+
+    
+.page-header-listing{
+  border-bottom: 1px solid black;
+  margin-bottom: 2rem;
+
+  .st-list {
+    margin-bottom: 20px;
+  }
+
+  a {
+    display: inline-block;
+
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+    padding: 5px 0 !important;
+    color: $light-green;
+
+    .fa {
+      margin-top: 1rem;
+    }    
+  }
+}
+

@@ -1,0 +1,13 @@
+<script>
+  function ChangeContext(value){
+    if (value == 1)
+    {
+      var out = '<h5>Price</h5><div class="input-field col s12"><label for="listing_price">Price</label><div id="listing"></div><input class="validate col s12 number-input" min="30" type="number" name="listing[price]" id="listing_price" /></div><p><input name="listing[imove_in]" type="hidden" value="0" /><input type="checkbox" value="1" name="listing[imove_in]" id="listing_imove_in" /><label for="listing_imove_in">Instant Move In</label></p><h5>Location</h5><p><input name="listing[hide]" type="hidden" value="0" /><input type="checkbox" value="1" name="listing[hide]" id="listing_hide" /><label for="listing_hide">Hide Address</label></p><div class="input-field col s12"><label class="active" for="special">Place</label><input class="validate" id="special" type="text" name="listing[address]" /></div><h5>Vehicle</h5><div class="input-field col s12"><label class="active" for="listing_bedroom">Bedroom</label><input class="validate" type="text" name="listing[bedroom]" id="listing_bedroom" /></div><div class="input-field col s12"><label class="active" for="listing_bathroom">Bathroom</label><input class="validate" type="text" name="listing[bathroom]" id="listing_bathroom" /></div><div class="input-field col s12"><label class="active" for="listing_car_park">Car park</label><input class="validate" type="text" name="listing[parking]" id="listing_parking" /></div>'
+    } else if (value == 2){
+      var out = '<div>ereteryg</div>'
+    } else if (value == 3){
+      var out = ''
+    }
+    document.getElementById('package').innerHTML = out
+  }
+</script>

@@ -1,0 +1,33 @@
+<div class="page-header">
+  <%= link_to users_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_user_path(@user), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Payment & transcation</h1>
+  <div class="card-panel  red lighten-5 ">
+    Credit Balance: <%= current_user.credit %>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s4"><a href="#payment">Payment</a></li>
+      <li class="tab col s4"><a href="#payments">Payment History</a></li>
+      <li class="tab col s4"><a href="#purchases">Purchase History</a></li>
+    </ul>
+  </div>
+  <div id="payment" class="col s12">
+    <%= render 'payment' %>
+  </div>
+  <div id="payments" class="col s12">
+      <%= render partial: 'payment__history', collection: @credits, as: :credit  %>
+  </div>
+  <div id="purchases" class="col s12">
+    <%= render partial: 'purchase_history', collection: @user.user_credits.order('created_at DESC'), as: :purchase %>
+  </div>
+  
+</div>

@@ -1,0 +1,4 @@
+<%= form_for(@listing, html: { class: "form-horizontal", role: "form" }) do |f| %>
+  <%= f.hidden_field :published_at , :value => Time.now, class: "form-control" %>
+  <%= f.submit "Bump",  class: "btn btn-primary" if @listing.published_at < 1.day.ago%>
+<% end %>

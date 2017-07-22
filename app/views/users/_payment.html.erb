@@ -1,0 +1,63 @@
+<form id="checkout" method="post" action="/credits/checkout">
+  <div class="modal-content">
+    <h4 class="modal-title">Topup Credit</h4>
+    <div class="value">
+    </div>
+    <div id="payment-form" class='hide'>
+    </div>
+    <div class="submit-btn hide">
+      <input type="submit" class= "btn waves-effect waves-green btn-info" value="Pay">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>       
+    </div>
+    <div class="row" id="payment">
+      <div class="col s12 l4">
+        <div class="radio">
+          <input name="user_credit[amount]" id="user_creditcredit1" type="radio" class='with-gap' value='20'/>
+          <label for="user_creditcredit1">
+            <div class="payment-header">Newbie choice</div>
+            <div class="payment-get">Get </div>
+            <div class="payment-price">30</div>
+            <div class="payment-credit">credits</div>
+            <div class="payment-desc">for only </div>
+            <span class ="btn user_creditcredit1">RM20</span>
+          </label>
+        </div>
+      </div>
+      <div class="col s12 l4">
+        <div class="radio">
+          <input name="user_credit[amount]" id="user_creditcredit2" type="radio" class='with-gap' value='50'  />
+          <label for="user_creditcredit2">
+            <div class="payment-header">Popular choice</div>
+            <div class="payment-get">Get </div>
+            <div class="payment-price">70</div>
+            <div class="payment-credit">credits</div>
+            <div class="payment-desc">for only </div>
+            <span class ="btn user_creditcredit2">RM20</span>
+          </label>
+        </div>
+      </div>
+      <div class="col s12 l4">
+        <div class="radio">
+          <input name="user_credit[amount]" id="user_creditcredit3" type="radio" class='with-gap' value='80'/>
+          <label for="user_creditcredit3">
+            <div class="payment-header">Exclusive choice</div>
+            <div class="payment-get">Get </div>
+            <div class="payment-price">90</div>
+            <div class="payment-credit">credits</div>
+            <div class="payment-desc">for only </div>
+            <span class ="btn user_creditcredit3">RM80</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</form>
+<script src="https://js.braintreegateway.com/js/braintree-2.23.0.min.js"></script>
+<script>
+var clientToken = "<%= @braintree_token%>";
+
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>

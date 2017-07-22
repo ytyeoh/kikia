@@ -1,0 +1,30 @@
+<h2>Log in</h2>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="row signup-user">
+    <div class="input-field col s12">
+      <%= f.label :email, class: "active" %>
+      <%= f.text_field :email, class: "validate" %>
+    </div>
+
+    <div class="input-field col s12">
+      <%= f.label :password, class: "active" %>
+      <%= f.password_field :password, autocomplete: "off", class: "validate" %>
+    </div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div class="field col s6 left-align">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end -%>  
+
+    <div class="input-field col s6 right-align">
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    </div>
+    <div class="col s12">
+    <%= render "users/shared/links" %>
+    </div>
+  </div>
+<% end %>
+
+

@@ -1,0 +1,31 @@
+.user{
+  h1{
+    color: $dark-green;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 1px solid $grey;
+    padding: 10px 10px;
+  }
+  h2{
+    color: $dark-green;
+    font-size: 20px;
+    text-align: left;
+    border-bottom: 1px solid $grey;
+    padding: 10px 10px;
+  }
+  img{
+    width: 165px;
+    height: 165px;
+  }
+  .file-field{
+    .btn{
+      float:none;
+    }
+  }
+}
+@media only screen and (min-width: 600px){
+  .bottom{
+    text-align: end;
+  }
+}
+

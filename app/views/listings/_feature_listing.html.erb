@@ -1,0 +1,23 @@
+<% if user_signed_in? %>
+  <% if current_user.favorite_listing? @listing.id %>
+    <%= form_tag("/favorite_listings/#{@listing.id}", class: "unlike-listing", remote: true, method: :delete) do %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <button class="empty-btn fav "><i class="fa fa-3x fa-heart "></i> </button>
+    <% end %>
+    <%= form_tag("/favorite_listing", class: "like-listing hide", remote: true,  method: :post) do %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag 'listing_id', @listing.id %>
+      <button class="empty-btn fav "><i class="fa fa-3x fa-heart-o "></i> </button>
+    <% end %>
+  <% else %>
+    <%= form_tag("/favorite_listings/#{@listing.id}", class: "unlike-listing hide", remote: true,  method: :delete) do %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <button class="empty-btn fav "><i class="fa fa-3x fa-heart "></i> </button>
+    <% end %>
+    <%= form_tag("/favorite_listings", class: "like-listing", remote: true, method: :post) do %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag 'listing_id', @listing.id %>
+      <button class="empty-btn fav "><i class="fa fa-3x fa-heart-o "></i> </button>
+    <% end %>
+  <% end %>
+<% end %>

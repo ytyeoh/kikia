@@ -1,0 +1,54 @@
+.signup-user{
+  width: 50%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  .left-align{
+    margin-top: 1rem;
+  }
+
+  .image{
+    border: 1px solid $dark-grey;
+    padding: 3rem 0;
+    border-radius: 100px;
+    width: 165px;
+    height: 165px !important;
+    color: $dark-grey;
+    background-color: inherit;
+    float: none!important;
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .image:hover{
+    background-color: $primary-color;
+    color: white;
+  }
+
+  .avatar{
+    background-image: url('');
+    background-size: cover;
+    background-position: center;
+    height: 165;
+    width: 165;
+    border: 1px solid $dark-grey;
+  }
+
+  a{
+    color: $dark-green;
+    font-size: 0.8571rem;
+    font-weight: 200;
+    font-style: italic;
+    margin-top: 1rem;
+  }
+  a:hover{
+    color: $primary-color;
+    font-weight: 300;
+  }
+}
+@media only screen and (max-width: 992px){
+  .signup-user{
+    width: 100%;
+  }
+}
