@@ -123,16 +123,13 @@ class ListingsController < ApplicationController
   def booking
     @result = Braintree::Transaction.sale(amount: params[:amount],payment_method_nonce: params[:payment_method_nonce])
     if @result.success?
-      current_user.update(braintree_customer_id: @result.transaction.customer_details.id, credit: new_credit) unless current_user.has_payment_info?
+      current_user.update(braintree_customer_id: @result.transaction.customer_details.id) unless current_user.has_payment_info?
       current_user.save
       respond_to do |format|
-       
-        start_time = Date.parse(params[:time_start]) + params[:meet_time].to_i.hours
-        end_time = start_time + params[:time].to_i.days + @listing.time_duration.to_i.hours
-
-        @booking = current_user.book! @listing, amount: 1, time_start: start_time, time_end: end_time
-        
-        if @booking
+        begin_time = Date.parse(params[:time_start])+params[:meet_time].to_i.hours
+        end_time = begin_time + @listing.time_duration.hours
+        @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id) 
+        if @booking.save
           format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
           format.json { render :show, status: :created, location: @listing }
         else
@@ -160,7 +157,7 @@ class ListingsController < ApplicationController
     def generate_client_token
       if current_user
         if current_user.has_payment_info?
-          Braintree::ClientToken.generate#(customer_id: current_user.braintree_customer_id)
+          Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
         else
           Braintree::ClientToken.generate
         end
