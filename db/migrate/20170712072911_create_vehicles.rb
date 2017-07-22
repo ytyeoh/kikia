@@ -7,5 +7,6 @@ class CreateVehicles < ActiveRecord::Migration
       t.integer :brand
       t.timestamps null: false
     end
+    add_index :vehicles, :user_id
   end
 end

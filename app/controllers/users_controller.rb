@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user.vehicle = Vehicle.new
   end
 
   # POST /users

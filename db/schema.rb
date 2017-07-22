@@ -11,35 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719143722) do
+ActiveRecord::Schema.define(version: 20170717081037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "acts_as_bookable_bookings", force: :cascade do |t|
-    t.integer  "bookable_id"
-    t.string   "bookable_type"
-    t.integer  "booker_id"
-    t.string   "booker_type"
-    t.integer  "amount"
-    t.text     "schedule"
-    t.datetime "time_start"
-    t.datetime "time_end"
-    t.datetime "time"
-    t.datetime "created_at"
-  end
-
-  add_index "acts_as_bookable_bookings", ["bookable_type", "bookable_id"], name: "index_acts_as_bookable_bookings_bookable", using: :btree
-  add_index "acts_as_bookable_bookings", ["booker_type", "booker_id"], name: "index_acts_as_bookable_bookings_booker", using: :btree
-
   create_table "bookings", force: :cascade do |t|
     t.float    "amount"
-    t.integer  "owner_id"
     t.integer  "customer_id"
     t.integer  "listing_id"
+    t.integer  "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "bookings", ["customer_id"], name: "index_bookings_on_customer_id", using: :btree
+  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
 
   create_table "credit_records", force: :cascade do |t|
     t.integer  "user_id"
@@ -81,12 +68,21 @@ ActiveRecord::Schema.define(version: 20170719143722) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.boolean  "active"
+    t.boolean  "imove_in"
     t.integer  "price"
+    t.integer  "bedroom"
+    t.integer  "bathroom"
+    t.integer  "parking"
+    t.integer  "furnished"
+    t.integer  "area"
+    t.integer  "property"
     t.boolean  "hide"
+    t.text     "schedule"
     t.integer  "capacity"
     t.integer  "package"
-    t.text     "schedule"
+    t.integer  "time_duration"
+    t.time     "pick_up_time"
+    t.boolean  "active"
   end
 
   add_index "listings", ["user_id"], name: "index_listings_on_user_id", using: :btree
@@ -176,6 +172,8 @@ ActiveRecord::Schema.define(version: 20170719143722) do
     t.datetime "updated_at",         null: false
   end
 
+  add_index "vehicle_images", ["vehicle_id"], name: "index_vehicle_images_on_vehicle_id", using: :btree
+
   create_table "vehicles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "seat"
@@ -184,5 +182,7 @@ ActiveRecord::Schema.define(version: 20170719143722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id", using: :btree
 
 end

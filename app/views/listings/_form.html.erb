@@ -17,7 +17,7 @@
   <% elsif @listing.package == 2 %>
     <%= render 'air_form', :f => f %>
   <% else %>
-    <%= render 'new_form', :f => f %>
+    <%= render 'easy_form', :f => f %>
   <% end %>
 
 
@@ -25,18 +25,18 @@
     <h5>Time</h5>
 
     <div class="input-field col s12">
-      <%= f.label :duration, class: "active" %>
-      <%= f.select(:duration, (4..12).step(1).to_a.map{|s| ["#{s} Hours", s]}) %>
+      <%= f.label :time_duration, 'Travel Period', class: "active" %>
+      <%= f.select(:time_duration, (4..12).step(1).to_a.map{|s| ["#{s} Hours", s]}) %>
     </div>
 
     <div class="input-field col s12">
-      <%= f.label :begin_time, class: "active" %>
-      <%= f.datetime_local_field :begin_time, class: "datepicker" %>
+      <%= f.label :capacity, 'Max Passenger', class: "active" %>
+      <%= f.select(:capacity, (3..16).step(1).to_a.map{|s| ["#{s} passengers", s]}, current_user.vehicle.seat) %>
     </div>
 
-    <div class="input-field col s12">
-      <%= f.label :time, class: "active" %>
-      <%= f.text_field :time, class: "timepicker" %>
+    <div class="input-field col s12"
+      <%= f.label :pick_up_time, 'Early Time Pickup', class: "active" %>
+      <%= f.text_field :pick_up_time, class: "timepicker" %>
     </div>
 
     <div id="image"></div>

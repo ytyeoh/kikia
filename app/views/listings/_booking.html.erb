@@ -4,6 +4,11 @@
 
     <%= text_field_tag 'time_start', nil, class: "datepicker" %>
   </div>
+  <div class="input-field col s12">
+    <label class="active" for="special">Time</label>
+
+    <%= text_field_tag 'meet_time', nil, class: "timepicker" %>
+  </div>
   
   <div class="input-field col s12">
     <label class="active" for="special">Date</label>
@@ -16,6 +21,6 @@
 
     <%= number_field_tag 'amount', @listing.price, readonly: true, id: 'travel_amount' %>
   </div>
-  
+  <%= hidden_field_tag 'id', @listing.id %>
   <%= render 'payment_form' %>
 <% end %>

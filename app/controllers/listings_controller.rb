@@ -1,5 +1,5 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :booking]
   before_action :authenticate_user!, only: [:new, :create]
   before_action :braintree_token, only: [:booking]
   skip_before_action :verify_authenticity_token, only: [:booking]
@@ -65,7 +65,8 @@ class ListingsController < ApplicationController
     # end
 
     @listing.schedule = IceCube::Schedule.new(begin_time, duration: duration.hours)
-    @listing.schedule.add_recurrence_rule IceCube::Rule.daily.hour_of_day(params[:listing][:time].scan(/\d+/).first.to_i)
+
+    @listing.schedule.add_recurrence_rule IceCube::Rule.weekly.day(:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday).hour_of_day(params[:listing][:time].scan(/\d+/).first.to_i)
 
     respond_to do |format|
       if @listing.save
@@ -132,13 +133,17 @@ class ListingsController < ApplicationController
 
   def booking
     @result = Braintree::Transaction.sale(amount: params[:amount],payment_method_nonce: params[:payment_method_nonce])
-byebug
     if @result.success?
       current_user.update(braintree_customer_id: @result.transaction.customer_details.id, credit: new_credit) unless current_user.has_payment_info?
       current_user.save
-      
       respond_to do |format|
-        if current_user.book! @listing, time_start: params[:time_start], time_end: (params[:time_start]+params[:time])
+       
+        start_time = Date.parse(params[:time_start]) + params[:meet_time].to_i.hours
+        end_time = start_time + params[:time].to_i.days + @listing.time_duration.to_i.hours
+        byebug
+        @booking = current_user.book! @listing, amount: 1, time_start: start_time, time_end: end_time
+        
+        if @booking
           format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
           format.json { render :show, status: :created, location: @listing }
         else
@@ -155,10 +160,6 @@ byebug
 
   def owner
     @listings = Listing.where(user_id: current_user.id).order("published_at DESC").page params[:listing]
-    @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
-      marker.lat listing.latitude
-      marker.lng listing.longitude
-    end
   end
 
   def fav
@@ -170,7 +171,7 @@ byebug
     def generate_client_token
       if current_user
         if current_user.has_payment_info?
-          Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
+          Braintree::ClientToken.generate#(customer_id: current_user.braintree_customer_id)
         else
           Braintree::ClientToken.generate
         end
@@ -183,6 +184,6 @@ byebug
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :desc, :price, :address, :latitude, :longitude, :token, :coin, :published_at, :images, :active, :hide, :package, :capacity)
+      params.require(:listing).permit(:name, :desc, :price, :address, :latitude, :longitude, :token, :coin, :published_at, :images, :active, :hide, :package, :capacity, :time_duration)
     end
 end
