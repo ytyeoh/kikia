@@ -6,5 +6,6 @@ class CreateVehicleImages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :vehicle_images, :vehicle_id
   end
 end

@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716100345) do
+ActiveRecord::Schema.define(version: 20170723090535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.float    "amount"
+    t.integer  "user_id"
+    t.integer  "listing_id"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.time     "time"
+    t.datetime "begin_time"
+    t.datetime "end_time"
+    t.integer  "driver_id"
+  end
+
+  add_index "bookings", ["driver_id"], name: "index_bookings_on_driver_id", using: :btree
+  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "credit_records", force: :cascade do |t|
     t.integer  "user_id"
@@ -65,6 +82,12 @@ ActiveRecord::Schema.define(version: 20170716100345) do
     t.integer  "area"
     t.integer  "property"
     t.boolean  "hide"
+    t.text     "schedule"
+    t.integer  "capacity"
+    t.integer  "package"
+    t.integer  "time_duration"
+    t.time     "pick_up_time"
+    t.boolean  "active"
   end
 
   add_index "listings", ["user_id"], name: "index_listings_on_user_id", using: :btree
@@ -154,6 +177,8 @@ ActiveRecord::Schema.define(version: 20170716100345) do
     t.datetime "updated_at",         null: false
   end
 
+  add_index "vehicle_images", ["vehicle_id"], name: "index_vehicle_images_on_vehicle_id", using: :btree
+
   create_table "vehicles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "seat"
@@ -162,5 +187,7 @@ ActiveRecord::Schema.define(version: 20170716100345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id", using: :btree
 
 end

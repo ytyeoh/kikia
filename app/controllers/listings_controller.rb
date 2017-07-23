@@ -1,9 +1,16 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :booking]
   before_action :authenticate_user!, only: [:new, :create]
+  before_action :braintree_token, only: [:booking]
+  skip_before_action :verify_authenticity_token, only: [:booking]
 
   # GET /listings
   # GET /listings.json
+
+  def braintree_token
+    @braintree_token = generate_client_token
+  end
+
   def index
     if params[:query].present?
       @listingss = Listing.search params[:query], fields: [:search_tags], where: {imove_in: params[:imove_in], price: {gte: params[:lower], lte: params[:higher]}}, order: {published_at: :desc,}
@@ -11,17 +18,21 @@ class ListingsController < ApplicationController
     else
       @listings = Listing.all.order("published_at DESC").page(params[:listing]).per(10)
     end
-    @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
-      marker.lat listing.latitude
-      marker.lng listing.longitude
-    end
   end
 
   # GET /listings/1
   # GET /listings/1.json
   def show
-    @credit = CreditRecord.new
     @listing = Listing.find(params[:id])
+    @a=[]
+    Booking.where(driver_id: @listing.user.id).where("end_time > ?", Date.today).each do |x|
+      array = []
+      array <<  (x.begin_time).strftime("%Y").to_i << (x.begin_time - 1.month).strftime("%-m ").to_i << (x.begin_time).strftime("%d").to_i
+      @a << array
+    end
+    @a = @a.to_json.html_safe
+    @braintree_token = generate_client_token
+    @credit = CreditRecord.new
     @listing.search_tags << 'room rent' << 'house rent'
     @hash = Gmaps4rails.build_markers(@listing) do |listing, marker|
       marker.lat listing.latitude
@@ -40,6 +51,7 @@ class ListingsController < ApplicationController
   # GET /listings/new
   def new
     @listing = Listing.new
+    @listing.capacity = current_user.vehicle.seat
   end
 
   # GET /listings/1/edit
@@ -115,12 +127,32 @@ class ListingsController < ApplicationController
     render json: Listing.search(params[:query], autocomplete: true, limit: 10).map(&:city)
   end
 
+  def booking
+    @result = Braintree::Transaction.sale(amount: params[:amount],payment_method_nonce: params[:payment_method_nonce])
+    if @result.success?
+      current_user.update(braintree_customer_id: @result.transaction.customer_details.id) unless current_user.has_payment_info?
+      current_user.save
+      respond_to do |format|
+        begin_time = Date.parse(params[:time_start])+params[:meet_time].to_i.hours
+        end_time = begin_time + @listing.time_duration.hours
+        @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id, driver_id: @listing.user.id, status: 1) 
+        if @booking.save
+          format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
+          format.json { render :show, status: :created, location: @listing }
+        else
+          format.html { render :show }
+          format.json { render json: @credit.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      flash[:alert] = "Something went wrong while processing your transaction. Please try again!"
+      gon.client_token = generate_client_token
+      redirect_to :back
+    end
+  end
+
   def owner
     @listings = Listing.where(user_id: current_user.id).order("published_at DESC").page params[:listing]
-    @hash = Gmaps4rails.build_markers(@listings) do |listing, marker|
-      marker.lat listing.latitude
-      marker.lng listing.longitude
-    end
   end
 
   def fav
@@ -129,12 +161,22 @@ class ListingsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def generate_client_token
+      if current_user
+        if current_user.has_payment_info?
+          Braintree::ClientToken.generate(customer_id: current_user.braintree_customer_id)
+        else
+          Braintree::ClientToken.generate
+        end
+      end
+    end
+
     def set_listing
       @listing = Listing.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :desc, :price, :address, :latitude, :longitude, :token, :coin, :published_at, :images, :imove_in, :property, :furnished, :area, :parking, :bathroom, :bedroom, :hide)
+      params.require(:listing).permit(:name, :desc, :price, :address, :token, :coin, :published_at, :images, :active, :hide, :package, :capacity, :time_duration, :pick_up_time)
     end
 end

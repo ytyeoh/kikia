@@ -28,6 +28,7 @@
       <%= render_gallery_for @listing.pictures %>
       <br>
       <%= render 'feature_listing' %>
+      <%= render 'booking' %>
       <% if current_user.present? && current_user.id == @listing.user_id %>
         <%= render 'auto_bump' %>
         <%= render 'highlight' %>
@@ -53,4 +54,11 @@
     
   </div>
 </div>
+<script src="https://js.braintreegateway.com/js/braintree-2.23.0.min.js"></script>
+<script>
+var clientToken = "<%= @braintree_token%>";
 
+braintree.setup(clientToken, "dropin", {
+  container: "payment-form"
+});
+</script>
