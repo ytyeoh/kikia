@@ -33,12 +33,7 @@ class ListingsController < ApplicationController
     @a = @a.to_json.html_safe
     @braintree_token = generate_client_token
     @credit = CreditRecord.new
-    @listing.search_tags << 'room rent' << 'house rent'
-    @hash = Gmaps4rails.build_markers(@listing) do |listing, marker|
-      marker.lat listing.latitude
-      marker.lng listing.longitude
-    end
-    @listings = Listing.where(city: @listing.city).order("price ASC").first(6)
+     @listings = Listing.where(user_id: @listing.user.id).where.not(id: @listing.id).order("price ASC").first(6)
     @listing.view += 1
     if current_user
       if @listing.user.id == current_user.id
