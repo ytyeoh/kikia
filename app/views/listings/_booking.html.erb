@@ -2,13 +2,29 @@
   <div class="input-field col s12">
     <label class="active" for="special">Date</label>
 
-    <%= text_field_tag 'time_start', nil, class: "datepicker" %>
+    <%= text_field_tag 'time_start', nil, class: "datepickers" %>
   </div>
   <div class="input-field col s12">
     <label class="active" for="special">Time</label>
 
     <%= text_field_tag 'meet_time', nil, class: "timepicker" %>
   </div>
+  <script>
+  var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
+  var booking_day = <%= @a %>;
+
+  var day = booking_day.splice(0, -1, { from: [0,0,0], to: yesterday });
+  $('.datepickers').pickadate({
+    disable: booking_day,
+    onSet: function( arg ){
+        if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+        }
+    },
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  </script>
   
   <div class="input-field col s12">
     <label class="active" for="special">Date</label>

@@ -23,9 +23,16 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @listing = Listing.find(params[:id])
+    @a=[]
+    Booking.where(driver_id: @listing.user.id).where("end_time > ?", Date.today).each do |x|
+      array = []
+      array <<  (x.begin_time).strftime("%Y").to_i << (x.begin_time - 1.month).strftime("%-m ").to_i << (x.begin_time).strftime("%d").to_i
+      @a << array
+    end
+    @a = @a.to_json.html_safe
     @braintree_token = generate_client_token
     @credit = CreditRecord.new
-    @listing = Listing.find(params[:id])
     @listing.search_tags << 'room rent' << 'house rent'
     @hash = Gmaps4rails.build_markers(@listing) do |listing, marker|
       marker.lat listing.latitude
@@ -128,7 +135,7 @@ class ListingsController < ApplicationController
       respond_to do |format|
         begin_time = Date.parse(params[:time_start])+params[:meet_time].to_i.hours
         end_time = begin_time + @listing.time_duration.hours
-        @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id) 
+        @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id, driver_id: @listing.user.id, status: 1) 
         if @booking.save
           format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
           format.json { render :show, status: :created, location: @listing }
