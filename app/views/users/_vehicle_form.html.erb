@@ -1,0 +1,28 @@
+<%= f.hidden_field :id %>
+<div class="input-field nested-fields col s12 l8">
+  <%= f.label :seat, class: "active" %>
+  <%= f.select(:seat, (3..16).step(1).to_a.map{|s| ["#{s} passengers", s]}) %>
+</div>
+
+<div class="input-field nested-fields col s12 l8">
+  <%= f.label :model, class: "active" %>
+  <%= f.text_field :model, class: "validate" %>
+</div>
+
+<div class="input-field nested-fields col s12 l8">
+  <%= f.label :brand, class: "active" %>
+  <%= f.text_field :brand, class: "validate" %>
+</div>
+
+<div id="image"></div>
+
+
+
+
+<div class="col s12">
+  <div class="card-panel waves-effect waves-block waves-green" id="clickzone">
+      <span class="">Drop file here or click here
+      </span>
+    </div>
+  <div classs="dropzone-previews" id ="previews"></div>
+</div>

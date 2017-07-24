@@ -1,0 +1,14 @@
+
+<!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <%= render 'customer_form' unless current_user.has_payment_info? %>
+      <div id="payment-form" class=''>
+    </div>
+    <div class="modal-footer">
+      <%= submit_tag 'Pay', class: 'btn' %>
+    </div>
+  </div>

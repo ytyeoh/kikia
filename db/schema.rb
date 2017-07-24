@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105075549) do
+ActiveRecord::Schema.define(version: 20170724104352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.float    "amount"
+    t.integer  "user_id"
+    t.integer  "listing_id"
+    t.integer  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.time     "time"
+    t.datetime "begin_time"
+    t.datetime "end_time"
+    t.integer  "driver_id"
+    t.integer  "payment_type"
+  end
+
+  add_index "bookings", ["driver_id"], name: "index_bookings_on_driver_id", using: :btree
+  add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
+  add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
 
   create_table "credit_records", force: :cascade do |t|
     t.integer  "user_id"
@@ -65,6 +83,12 @@ ActiveRecord::Schema.define(version: 20170105075549) do
     t.integer  "area"
     t.integer  "property"
     t.boolean  "hide"
+    t.text     "schedule"
+    t.integer  "capacity"
+    t.integer  "package"
+    t.integer  "time_duration"
+    t.time     "pick_up_time"
+    t.boolean  "active"
   end
 
   add_index "listings", ["user_id"], name: "index_listings_on_user_id", using: :btree
@@ -85,6 +109,17 @@ ActiveRecord::Schema.define(version: 20170105075549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "user_credits", force: :cascade do |t|
     t.integer  "user_id"
@@ -125,5 +160,35 @@ ActiveRecord::Schema.define(version: 20170105075549) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "vehicle_images", force: :cascade do |t|
+    t.integer  "vehicle_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "vehicle_images", ["vehicle_id"], name: "index_vehicle_images_on_vehicle_id", using: :btree
+
+  create_table "vehicles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "seat"
+    t.string   "model"
+    t.integer  "brand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "vehicles", ["user_id"], name: "index_vehicles_on_user_id", using: :btree
 
 end

@@ -28,6 +28,7 @@
       <%= render_gallery_for @listing.pictures %>
       <br>
       <%= render 'feature_listing' %>
+      <%= render 'booking' %>
       <% if current_user.present? && current_user.id == @listing.user_id %>
         <%= render 'auto_bump' %>
         <%= render 'highlight' %>
@@ -54,3 +55,8 @@
   </div>
 </div>
 
+<script>
+braintree.setup(gon.client_token, "dropin", {
+  container: "payment-form"
+});
+</script>

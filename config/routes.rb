@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :pictures, only: [:destroy]
   resources :listings do 
     collection do
+      post :booking
       post :import
       get :autocomplete, :owner, :fav # <= add this line
     end

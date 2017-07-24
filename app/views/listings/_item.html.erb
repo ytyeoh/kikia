@@ -21,10 +21,10 @@
     </div>
     <% end %>
     <div class="col m2 s12">
-      <% if listing.imove_in %>
+      <% if listing.active %>
         <div class='btn red lighten-1 margin-top2rem'>Instant Move In</div>
       <% end %>
-      <h5 class= "dark-green-text">RM<%= listing.price %> <br>per month</h5>
+      <h5 class= "dark-green-text">RM<%= listing.price %> <br>per hour</h5>
       <%= render 'feature_listing', :@listing =>listing %>
     </div>
   </div>
