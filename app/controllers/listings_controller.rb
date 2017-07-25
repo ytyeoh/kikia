@@ -138,7 +138,6 @@ class ListingsController < ApplicationController
                   amount: params[:amount],
                   payment_method_nonce: params[:payment_method_nonce])
     end
-    byebug
     if @result.success?
       current_user.update(braintree_customer_id: @result.transaction.customer_details.id) unless current_user.has_payment_info?
       current_user.save
