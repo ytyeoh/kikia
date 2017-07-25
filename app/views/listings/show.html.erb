@@ -54,9 +54,11 @@
     
   </div>
 </div>
-
-<script>
-braintree.setup(gon.client_token, "dropin", {
-  container: "payment-form"
-});
+<% if current_user %>
+  <script src="https://js.braintreegateway.com/js/braintree-2.23.0.min.js"></script>
+  <script>
+  braintree.setup(gon.client_token, "dropin", {
+    container: "payment-form"
+  });
+<% end %>
 </script>

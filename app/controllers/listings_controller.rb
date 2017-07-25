@@ -138,13 +138,14 @@ class ListingsController < ApplicationController
                   amount: params[:amount],
                   payment_method_nonce: params[:payment_method_nonce])
     end
+    byebug
     if @result.success?
       current_user.update(braintree_customer_id: @result.transaction.customer_details.id) unless current_user.has_payment_info?
       current_user.save
       respond_to do |format|
         begin_time = Date.parse(params[:time_start])+params[:meet_time].to_i.hours
         end_time = begin_time + @listing.time_duration.hours
-        @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id, driver_id: @listing.user.id, status: 1, payment_type: @result.transaction.payment_instrument_type) 
+        @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id, driver_id: @listing.user.id, status: 1, payment_type: @result.transaction.payment_instrument_type, status: 1) 
         if @booking.save
           format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
           format.json { render :show, status: :created, location: @listing }

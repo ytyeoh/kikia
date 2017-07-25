@@ -61,6 +61,10 @@ $(document).ready(function(){
   });
 });
 
+function showalert(){
+  alert('login to continue purchase');
+};
+
 function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();

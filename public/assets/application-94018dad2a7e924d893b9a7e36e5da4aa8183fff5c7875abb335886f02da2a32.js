@@ -42877,10 +42877,6 @@ var globalEvent = {
 
 }).call(this);
 (function() {
-
-
-}).call(this);
-(function() {
   window.image_path = function(name) {
     return {
       "cancel-off.png": "/assets/cancel-off-a9b80e5db625004a79c5a14979accb3501b273f69dfbbffbd9309c713c5cee78.png",
@@ -42979,7 +42975,7 @@ $(document).ready(function(){
   $('.timepicker').pickatime({
     default: '9', // Set default time
     fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
-    twelvehour: true, // Use AM/PM or 24-hour format
+    twelvehour: false, // Use AM/PM or 24-hour format
     donetext: 'OK', // text for done-button
     cleartext: 'Clear', // text for clear-button
     canceltext: 'Cancel', // Text for cancel-button
@@ -42996,111 +42992,11 @@ $(document).ready(function(){
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
-  Dropzone.autoDiscover = false;
-  var myDropzone = new Dropzone('#user-form', {
-    paramName: "[images]", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
-    previewsContainer: "#previews",
-    addRemoveLinks: true,
-    autoProcessQueue: false,
-    clickable: "#clickzone",
-    maxFiles: 10,
-    parallelUploads: 10,
-    uploadMultiple: true,
-    dictDefaultMessage:'',
-    removedfile: function(file) {
-      var id = $(file.previewTemplate).attr('id');
-      var x = document.getElementById("image");
-      var text = document.createElement('div');
-      text.innerHTML = '<input type="checkbox" name="delete_images[]" value='+id + ' checked />'
-      x.appendChild(text);
-      var previewElement;
-      return (previewElement = file.previewElement) != null ? (previewElement.parentNode.removeChild(file.previewElement)) : (void 0);
-    },
-    init: function(){
-        <% @user.vehicle.vehicle_images.each do |image| %>
-        var id = <%= image.id %>
-          var mockFile = { size: <%= image.image.size %>, type: 'image/jpeg' };
-          this.options.addedfile.call(this, mockFile);
-          this.options.thumbnail.call(this, mockFile, "<%= image.image.url(:thumb) %>");
-           $(".dz-preview:last-child").attr("id", id);
-        <% end %>
-    },
-    accept: function(file, done) {
-      if (file.name == "justinbieber.jpg") {
-        done("Naha, you don't.");
-      }
-      else { done(); }
-    },
-  });
-  $("form").on("submit", function (event) {
-    if (myDropzone.getQueuedFiles().length > 0) {
-      event.preventDefault();
-      event.stopPropagation();
-      myDropzone.processQueue();
-    }
-    else {
-      // Upload anyway without files
-      dropzone.uploadFiles([ ]);
-    }
-     // Tell Dropzone to process all queued files.
-  });
-  myDropzone.on("queuecomplete", function(file) {
-    window.location.href = window.location.pathname.replace("edit", "");
-  });
-  Dropzone.autoDiscover = false;
-  var myDropzone = new Dropzone('#listing_form', {
-    paramName: "[images]", // The name that will be used to transfer the file
-    maxFilesize: 2, // MB
-    previewsContainer: "#previews",
-    addRemoveLinks: true,
-    autoProcessQueue: false,
-    clickable: "#clickzone",
-    maxFiles: 10,
-    parallelUploads: 10,
-    uploadMultiple: true,
-    dictDefaultMessage:'',
-    removedfile: function(file) {
-      var id = $(file.previewTemplate).attr('id');
-      var x = document.getElementById("image");
-      var text = document.createElement('div');
-      text.innerHTML = '<input type="checkbox" name="delete_images[]" value='+id + ' checked />'
-      x.appendChild(text);
-      var previewElement;
-      return (previewElement = file.previewElement) != null ? (previewElement.parentNode.removeChild(file.previewElement)) : (void 0);
-    },
-    init: function(){
-        <% @listing.pictures.each do |image| %>
-        var id = <%= image.id %>
-          var mockFile = { size: <%= image.image.size %>, type: 'image/jpeg' };
-          this.options.addedfile.call(this, mockFile);
-          this.options.thumbnail.call(this, mockFile, "<%= image.image.url(:thumb) %>");
-           $(".dz-preview:last-child").attr("id", id);
-        <% end %>
-    },
-    accept: function(file, done) {
-      if (file.name == "justinbieber.jpg") {
-        done("Naha, you don't.");
-      }
-      else { done(); }
-    },
-  });
-  $("form").on("submit", function (event) {
-    if (myDropzone.getQueuedFiles().length > 0) {
-      event.preventDefault();
-      event.stopPropagation();
-      myDropzone.processQueue();
-    }
-    else {
-      // Upload anyway without files
-      dropzone.uploadFiles([ ]);
-    }
-     // Tell Dropzone to process all queued files.
-  });
-  myDropzone.on("queuecomplete", function(file) {
-    window.location.href = "/listings/owner";
-  });
 });
+
+function showalert(){
+  alert('login to continue purchase');
+};
 
 function readURL(input) {
   if (input.files && input.files[0]) {

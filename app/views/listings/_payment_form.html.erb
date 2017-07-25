@@ -1,12 +1,18 @@
 
 <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+<% if current_user %>
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Payment</a>
+<% else %>
+  <%= link_to "Payment",  new_user_session_path, onclick: "showalert();", class: "btn btn-primary" %>
+<% end %>
 
   <!-- Modal Structure -->
   <div id="modal1" class="modal">
     <div class="modal-content">
-      <%= render 'customer_form' unless current_user.has_payment_info? %>
-      <div id="payment-form" class=''>
+      <% if current_user %>
+        <%= render 'customer_form' unless current_user.has_payment_info? %>
+      <% end %>
+      <div id="payment-form" class=''></div>
     </div>
     <div class="modal-footer">
       <%= submit_tag 'Pay', class: 'btn' %>
