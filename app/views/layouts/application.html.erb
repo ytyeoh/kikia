@@ -17,6 +17,7 @@
     content='<%= yield_meta_tag(:keywords) %>' />
   <meta name='title'
     content='<%= yield_meta_tag(:title) %>' />
+  <%= csrf_meta_tags %>
   <div id="fb-root"></div>
     <%= render :partial => 'analytics/facebook_sdk' %>
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -28,7 +29,7 @@
   <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.7.22/css/materialdesignicons.min.css">
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js" %>
-  <%= csrf_meta_tags %>
+  <script src="https://js.braintreegateway.com/js/braintree-2.23.0.min.js"></script>
 </head>
 <body>
 <%= render partial: 'layouts/nav_bar' %>

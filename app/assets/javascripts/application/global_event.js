@@ -69,8 +69,13 @@ var globalEvent = {
   },
 
   totalPay: function() {
-    $('#travel_time').change(function(){
-      document.getElementById('travel_amount').value = $('#travel_amount')[0].defaultValue * this.value;
+    $('#input_to, #input_from' ).change(function(){
+      var from = $('#input_from').val().split(' ')[0];
+      var to = $('#input_to').val().split(' ')[0];
+      if (to != "" && from !=""){
+        debugger;
+        document.getElementById('travel_amount').value = (to-from+1) * $('#travel_amount')[0].defaultValue
+      }
     })
   }
 }

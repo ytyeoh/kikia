@@ -1,8 +1,13 @@
-<%= form_tag("/listings/booking", class: "unlike-listing", remote: true, method: :post) do %>
+<%= form_tag("/listings/booking", class: "unlike-listing", method: :post) do %>
   <div class="input-field col s12">
     <label class="active" for="special">Date</label>
 
-    <%= text_field_tag 'time_start', nil, class: "datepickers" %>
+    <%= text_field_tag 'time_start', nil, class: "datepickers", id: 'input_from' %>
+  </div>
+  <div class="input-field col s12">
+    <label class="active" for="special">Date end</label>
+
+    <%= text_field_tag 'time_end', nil, class: "datepickers", id: 'input_to' %>
   </div>
   <div class="input-field col s12">
     <label class="active" for="special">Time</label>
@@ -14,7 +19,8 @@
   var booking_day = <%= @a %>;
 
   var day = booking_day.splice(0, -1, { from: [0,0,0], to: yesterday });
-  $('.datepickers').pickadate({
+  var from_$input = $('#input_from').pickadate(
+    {
     disable: booking_day,
     onSet: function( arg ){
         if ( 'select' in arg ){ //prevent closing on selecting month/year
@@ -23,7 +29,48 @@
     },
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
+  }),
+      from_picker = from_$input.pickadate('picker')
+
+  var to_$input = $('#input_to').pickadate(
+    {
+    disable: booking_day,
+    onSet: function( arg ){
+        if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+        }
+    },
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  }),
+      to_picker = to_$input.pickadate('picker')
+
+
+  // Check if there’s a “from” or “to” date to start with.
+  if ( from_picker.get('value') ) {
+    to_picker.set('min', from_picker.get('select'))
+  }
+  if ( to_picker.get('value') ) {
+    from_picker.set('max', to_picker.get('select'))
+  }
+
+  // When something is selected, update the “from” and “to” limits.
+  from_picker.on('set', function(event) {
+    if ( event.select ) {
+      to_picker.set('min', from_picker.get('select'))    
+    }
+    else if ( 'clear' in event ) {
+      to_picker.set('min', false)
+    }
+  })
+  to_picker.on('set', function(event) {
+    if ( event.select ) {
+      from_picker.set('max', to_picker.get('select'))
+    }
+    else if ( 'clear' in event ) {
+      from_picker.set('max', false)
+    }
+  })
   </script>
   
   <div class="input-field col s12">
