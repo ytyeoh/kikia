@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def is_driver?
-    self.has_role? :admin
+    self.has_role? :driver
   end
 
   protected
