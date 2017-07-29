@@ -3,24 +3,23 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
-  <%= link_to edit_blog_path(@blog), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
+  <% if current_user %>
+    <% if current_user.is_admin? %>
+      <%= link_to edit_blog_path(@blog), class: 'btn btn-primary' do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit
+      <% end %>
+    <% end %>
   <% end %>
-  <h1>Show blog</h1>
+  <h1><%= @blog.category.capitalize + '-' + @blog.title.capitalize%> </h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Title:</dt>
-  <dd><%= @blog.title %></dd>
+<div class="blog row">
+  <div class="col s12">
+    <%= raw(@blog.desc) %>
+  </div>
+  <div class="col s12">
+    By <%= @blog.user.name %> on <%= @blog.created_at.to_time.strftime('%B %e at %l:%M %p') %>
+  </div>
+</div>
 
-  <dt>Desc:</dt>
-  <dd><%= raw(@blog.desc) %></dd>
-
-  <dt>User:</dt>
-  <dd><%= @blog.user_id %></dd>
-
-  <dt>Category:</dt>
-  <dd><%= @blog.category %></dd>
-
-</dl>
