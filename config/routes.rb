@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
   resources :blogs
+  resources :invoices, only: [:show]
   resources :favorite_listings, only: [:create, :destroy]
   resources :credit_records, only: [:create ,:show]
   resources :user_credits, only: [:new, :index, :show]
