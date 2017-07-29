@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user.vehicle = Vehicle.new
+    @roles = Role.all
   end
 
   # POST /users
@@ -53,6 +54,11 @@ class UsersController < ApplicationController
           @uploaded_images.each { |image, object|
             @user.vehicle.vehicle_images.create(image: object)
           }
+        end
+        if params[:driver] == '1'
+          @user.add_role :driver
+        else params[:driver] == '0'
+          @user.remove_role :driver
         end
         if params[:delete_images]
           params[:delete_images].each { |id|
