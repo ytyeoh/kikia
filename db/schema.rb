@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724104352) do
+ActiveRecord::Schema.define(version: 20170729115348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "blogs", force: :cascade do |t|
+    t.string   "title"
+    t.text     "desc"
+    t.integer  "user_id"
+    t.integer  "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "bookings", force: :cascade do |t|
     t.float    "amount"
@@ -33,6 +42,20 @@ ActiveRecord::Schema.define(version: 20170724104352) do
   add_index "bookings", ["driver_id"], name: "index_bookings_on_driver_id", using: :btree
   add_index "bookings", ["listing_id"], name: "index_bookings_on_listing_id", using: :btree
   add_index "bookings", ["user_id"], name: "index_bookings_on_user_id", using: :btree
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.string   "data_fingerprint"
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "ckeditor_assets", ["type"], name: "index_ckeditor_assets_on_type", using: :btree
 
   create_table "credit_records", force: :cascade do |t|
     t.integer  "user_id"

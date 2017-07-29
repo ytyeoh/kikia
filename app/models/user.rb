@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	has_many :listings
   has_many :credit_records
   has_many :favorite_listings
+  has_many :blogs
   has_one :vehicle
   accepts_nested_attributes_for :vehicle
   attr_accessor :driver

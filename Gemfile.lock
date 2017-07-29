@@ -50,6 +50,9 @@ GEM
     builder (3.2.2)
     byebug (9.0.5)
     chronic (0.10.2)
+    ckeditor (4.2.4)
+      cocaine
+      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -256,6 +259,7 @@ DEPENDENCIES
   aws-sdk (~> 1.5.7)
   braintree
   byebug
+  ckeditor
   coffee-rails (~> 4.1.0)
   devise
   dropzonejs-rails
