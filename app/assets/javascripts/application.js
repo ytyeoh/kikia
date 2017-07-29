@@ -21,6 +21,7 @@
 //= require select2
 //= require dropzone
 //= require hermitage
+//= require ckeditor/init
 //= require application/global_event
 //= require typeahead
 //= require turbolinks
