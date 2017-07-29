@@ -24,11 +24,15 @@
       <%= content_tag_for(:tr, @blogs) do |blog| %>
             <td><%= blog.title %></td>
             <td><%= blog.desc %></td>
-            <td><%= blog.user_id %></td>
+            <td><%= blog.user.name %></td>
             <td><%= blog.category %></td>
             <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% if current_user %>
+              <% if current_user.is_admin? %>
+                <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+                <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            <% end %>
       <% end %>
     </tbody>
   </table>
