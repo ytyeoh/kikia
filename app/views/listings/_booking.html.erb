@@ -15,7 +15,7 @@
     <%= text_field_tag 'meet_time', nil, class: "timepicker" %>
   </div>
   <script>
-  var yesterday = new Date((new Date()).valueOf()-1000*60*60*24);
+  var yesterday = new Date((new Date()).valueOf()+3000*60*60*24);
   var booking_day = <%= @a %>;
 
   var day = booking_day.splice(0, -1, { from: [0,0,0], to: yesterday });
