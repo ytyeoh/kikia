@@ -146,8 +146,6 @@ class ListingsController < ApplicationController
         end_time = begin_time + @listing.time_duration.hours
         @booking = Booking.new(amount: params[:amount], listing_id: @listing.id, begin_time: begin_time, end_time: end_time, time: params[:time], user_id: current_user.id, driver_id: @listing.user.id, status: 1, payment_type: @result.transaction.payment_instrument_type, status: 1) 
         if @booking.save
-          @invoice = Invoice.new(booking_id: @booking.id, status: 1, amount: params[:amount], payment_method: @result.transaction.payment_instrument_type)
-          @invoice.save
           format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
           format.json { render :show, status: :created, location: @listing }
         else
