@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col s6">
+    Invoice No: <%= @invoice.id %> <br>
+    address company <br>
+    stress <br>
+    tel <br>
+    sadfsa<br>
+    www.ssd.com
+  </div>
+  <div class="col s6">
+    LoGO
+    
+  </div>
+</div>
+
+<div class="row table">
+  <div class="col s2 border">
+    Purchase
+  </div>
+  <div class="col s4 border">
+    date
+  </div>
+  <div class="col s6 border">
+    amount
+  </div>
+  <div class="col s2 border topless">
+    <%= @invoice.booking.listing.name %>
+  </div>
+  <div class="col s4 border topless">
+    <%= @invoice.created_at.localtime.strftime("%Y-%m-%d %I:%M %p") %>
+  </div>
+  <div class="col s6 border topless">
+    <%= @invoice.amount %>
+  </div>
+  <div class="col s6 right-align">
+    Pay by <%= @invoice.payment_method.gsub('_', ' ') %>
+  </div>
+  <div class="col s6 right-align">
+    Total <%= @invoice.amount %>
+  </div>
+</div>
+
+<div class="row line">
+  <div class="col s6">
+    xxxx
+  </div>
+  <div class="col s6">
+    signature
+  </div>
+  <div class="col s12">
+    Thank you order
+  </div>
+</div>
