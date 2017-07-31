@@ -11,8 +11,8 @@
             <th>Payment Method</th>
             <th>Status</th>
             <th>Order Date</th>
-        <th></th>
-        <th></th>
+        <th>PDF</th>
+        <th>Refund</th>
       </tr>
     </thead>
 
@@ -24,6 +24,12 @@
             <td><%= invoice.status %></td>
             <td><%= invoice.created_at %></td>
             <td><%= link_to 'Show', invoice_path(invoice, :format => 'pdf') %></td>
+            <td>
+              <%= form_tag(invoice, method: "patch", id: 'form_'+invoice.id.to_s ) do %>
+                <input type="hidden" name="[invoice]status" value=4 >
+                <%= link_to 'refund',  "", class:'red-text', data: { confirm: 'Are you sure?' }, :onclick => "$('#form_#{invoice.id}').submit()" %>
+              <% end %>
+            </td>
       <% end %>
     </tbody>
   </table>
