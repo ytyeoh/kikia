@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :blogs
+  resources :invoices, only: [:show, :index, :update]
   resources :favorite_listings, only: [:create, :destroy]
   resources :credit_records, only: [:create ,:show]
   resources :user_credits, only: [:new, :index, :show]
@@ -25,5 +28,7 @@ Rails.application.routes.draw do
   post '/credits/checkout' => 'user_credits#create'
  
   root 'home#index'
+
+  
 
 end

@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
 	has_many :listings
   has_many :credit_records
   has_many :favorite_listings
+  has_many :blogs
   has_one :vehicle
   accepts_nested_attributes_for :vehicle
+  attr_accessor :driver
   has_many :bookings
   has_many :raters, through: :reviews, class_name: "User", foreign_key: :user_id # The users this user has rated
   has_many :users, through: :reviews, class_name: "User", foreign_key: :reter_id
@@ -39,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def is_driver?
-    self.has_role? :admin
+    self.has_role? :driver
   end
 
   protected

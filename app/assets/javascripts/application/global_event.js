@@ -70,11 +70,12 @@ var globalEvent = {
 
   totalPay: function() {
     $('#input_to, #input_from' ).change(function(){
-      var from = $('#input_from').val().split(' ')[0];
-      var to = $('#input_to').val().split(' ')[0];
-      if (to != "" && from !=""){
-        debugger;
-        document.getElementById('travel_amount').value = (to-from+1) * $('#travel_amount')[0].defaultValue
+      var oneDay = 24*60*60*1000;
+      var from = new Date($('#input_from').val());
+      var to = new Date($('#input_to').val());
+      var diffDays = 1 + Math.round(Math.abs((from.getTime() - to.getTime())/(oneDay)))
+      if ($('#input_from').val() != "" && $('#input_to').val() !=""){
+        document.getElementById('travel_amount').value = diffDays * $('#travel_amount')[0].defaultValue
       }
     })
   }

@@ -7,9 +7,13 @@
     <span class="grey-text total"><i> <%= @listings.total_count %> results</i></span>
   </div>
   <div class="inline-block right">
-  <%= link_to new_listing_path, class: 'btn-floating btn-large waves-effect waves-light','data-no-turbolink' => true do %>
-    <i class="material-icons">add</i>
-  <% end %>
+    <% if current_user %>
+      <% if current_user.is_admin? || current_user.is_driver? %>
+        <%= link_to new_listing_path, class: 'btn-floating btn-large waves-effect waves-light','data-no-turbolink' => true do %>
+          <i class="material-icons">add</i>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>
 <div class="row">

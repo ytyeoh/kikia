@@ -10,7 +10,7 @@
         </li>
         <li><%= link_to 'Listing', owner_listings_path, 'data-no-turbolink' => true %></li>
         <li><%= link_to 'Favorite', fav_listings_path %></li>
-        <li><%= link_to 'Payment', credit_users_path, 'data-no-turbolink' => true %></li>
+        <li><%= link_to 'Booking History', invoices_path, 'data-no-turbolink' => true %></li>
         <li><%= link_to 'Profile', edit_user_path(current_user.id) %></li>
         <% if current_user.is_admin? %>
           <li><%= link_to 'All User', users_path %></li>
@@ -21,6 +21,7 @@
         <li><%= link_to 'Sign in', new_user_session_path %></li>
         <li><%= link_to 'Sign up', new_user_registration_path %></li>
       <% end %>
+      <li><%= link_to 'Blog', blogs_path, 'data-no-turbolink' => true %></li>
     </ul>
   </div>
 </nav>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Kikia Order PO<%= @booking.id %> </title>
+    <%= render 'email_style' %>
+  </head>
+  <body class="">
+    <table border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+          <div class="content">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader">You have order <%= @listing.package %>, for <%= @booking.end_time %> end in <%= @booking.begin_time %> days in <%= @listing.city %>.</span>
+            <table class="main">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+                  <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <p>Hi <%= @user.name %>,</p>
+                        <p>You got order <%= @listing.package %>, begin <%= @booking.begin_time.strftime('%d/%m/%Y') %> and end at <%= @booking.end_time.strftime('%d/%m/%Y') %> locate in <%= @listing.city %></p>
+                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+                          <tbody>
+                            <tr>
+                              <td align="left">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                  <tbody>
+                                    <tr>
+                                      <td>
+                                        <%= link_to 'Download Invoice', invoice_url(@invoice, :format => 'pdf') %>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table>
+                          <tr>
+                            <td style='width: 40%;'>
+                              Customer Name
+                            </td>
+                            <td class='align-left'><%= @booking.user.name %></td>
+                          </tr>
+                          <tr>
+                            <td style='width: 40%;'>
+                              Package
+                            </td>
+                            <td class='align-left'><%= @listing.package %></td>
+                          </tr>
+                          <tr>
+                            <td style='width: 40%;'>
+                              Booking Number
+                            </td>
+                            <td class='align-left'><%= @booking.id %></td>
+                          </tr>
+                          <tr>
+                            <td style='width: 40%;'>
+                              Invoice Number
+                            </td>
+                            <td class='align-left'><%= @invoice.id %></td>
+                          </tr>
+                        </table>
+                        <p>Please contact customer by <%= (@booking.begin_time - 1.weeks).strftime('%d/%m/%Y') %> and arraneg scheulde with customer.</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            <!-- END MAIN CONTENT AREA -->
+            </table>
+
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <span class="apple-link">ALOT Technology Sdn Bhd, 4P, Lorong Delima 10,Gelugor 11700 Penang Malaysia.</span>  
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+            
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>
