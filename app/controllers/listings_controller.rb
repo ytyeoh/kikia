@@ -149,6 +149,7 @@ class ListingsController < ApplicationController
           @invoice = Invoice.new(booking_id: @booking.id, status: 1, amount: params[:amount], payment_method: @result.transaction.payment_instrument_type)
           @invoice.save
           BookingEmail.payment_email(current_user, @booking, @listing, @invoice).deliver_later
+          BookingEmail.notification(@listing.user, @booking, @listing, @invoice).deliver_later
           format.html { redirect_to listings_path(@listing), notice: 'You was successfully purchase deal.' }
           format.json { render :show, status: :created, location: @listing }
         else

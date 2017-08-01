@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Thank For Support Kikia - PO<%= @booking.id %></title>
+    <title>Kikia Order PO<%= @booking.id %> </title>
     <%= render 'email_style' %>
   </head>
   <body class="">
@@ -14,7 +14,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">You have successfully order <%= @listing.package %>, for <%= @booking.end_time.strftime('%d/%m/%Y at %H:%M %p') %> end in <%= @booking.begin_time.strftime('%d/%m/%Y at %H:%M %p') %> days in <%= @listing.city %>.</span>
+            <span class="preheader">You have order <%= @listing.package %>, for <%= @booking.end_time %> end in <%= @booking.begin_time %> days in <%= @listing.city %>.</span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -24,7 +24,7 @@
                     <tr>
                       <td>
                         <p>Hi <%= @user.name %>,</p>
-                        <p>You have successfully order <%= @listing.package %>, begin <span class='red-text'><%= @booking.begin_time.strftime('%d/%m/%Y at %H:%M %p') %></span> and end at <span class='red-text'><%= @booking.end_time.strftime('%d/%m/%Y at %H:%M %p') %></span> locate in <%= @listing.city %></p>
+                        <p>You got order <%= @listing.package %>, begin <%= @booking.begin_time.strftime('%d/%m/%Y') %> and end at <%= @booking.end_time.strftime('%d/%m/%Y') %> locate in <%= @listing.city %></p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -45,15 +45,15 @@
                         <table>
                           <tr>
                             <td style='width: 40%;'>
-                              Driver Name
+                              Customer Name
                             </td>
-                            <td class='align-left'><%= @booking.listing.user.name %></td>
+                            <td class='align-left'><%= @booking.user.name %></td>
                           </tr>
                           <tr>
                             <td style='width: 40%;'>
-                              Car Plate Number
+                              Package
                             </td>
-                            <td class='align-left'>32423</td>
+                            <td class='align-left'><%= @listing.package %></td>
                           </tr>
                           <tr>
                             <td style='width: 40%;'>
@@ -68,7 +68,7 @@
                             <td class='align-left'><%= @invoice.id %></td>
                           </tr>
                         </table>
-                        <p>Driver will contact you by <%= (@booking.begin_time - 1.weeks).strftime('%d/%m/%Y') %> Kindly read our cancel policy.</p>
+                        <p>Please contact customer by <%= (@booking.begin_time - 1.weeks).strftime('%d/%m/%Y') %> and arraneg scheulde with customer.</p>
                       </td>
                     </tr>
                   </table>
