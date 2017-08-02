@@ -50,6 +50,20 @@ $(document).ready(function(){
     ampmclickable: true, // make AM PM clickable
     aftershow: function(){} //Function for after opening timepicker  
   });
+  var yesterday = new Date((new Date()).valueOf()+3000*60*60*24);
+
+  // var day = booking_day.splice(0, -1, { from: [0,0,0], to: yesterday });
+  $('#calendar').pickadate(
+    {
+    disable: [{ from: [0,0,0], to: yesterday }],
+    onSet: function( arg ){
+        if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+        }
+    },
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
 });
 
 function showalert(){

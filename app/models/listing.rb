@@ -16,7 +16,7 @@ class Listing < ActiveRecord::Base
  #                     content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
 
  attr_accessor :time, :begin_time, :duration
-	enum package: {'Free & Easy': 1, 'Air Port Transfer': 2}
+	enum package: {'Car Hire With Driver': 1, 'Airport Transfer': 2}
 	enum property: { landed: 1, 'High Rise': 2, other: 3 }
 	enum furnished: { fully: 1, partialy: 2, basic: 3 }
 end

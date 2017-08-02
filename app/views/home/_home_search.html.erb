@@ -1,28 +1,19 @@
-<div class="col l2"></div>
-<div class="col s12 homecol l8">
-  <div class="row">
-    <%= form_tag listings_path, method: :get do %>
-    <div class="input-field col s12">
-      <div class="row home">
-        <div class="col s6 padding-zero">
-          <%= text_field_tag :query, params[:query], class: 'city home-form', placeholder: "Location",  autocomplete: "off" %>
-        </div>
-        <div class="col s6 padding-zero">
-          <%= select_tag :imove_in, "<option value=true>Instant Move In</option><option value=false>Normal Move In</option>".html_safe, class: 'home-form'%>
-        </div>
+<%= form_tag listings_path, method: :get do %>
+  <div class="col s12 border1px search">
+    <div class="row">
+      <div class="input-field col s12 l4">
+        <%= select_tag :package, options_for_select(Listing.packages.map {|k, v| [k.humanize.capitalize.split.map(&:capitalize)*' ', v]}), class: 'home-form' %>
+      </div>
+      <div class="input-field col s12 l3">
+        <i class="fa fa-calendar fa-1 prefix" aria-hidden="true"></i>
+        <%= text_field_tag 'time_end', nil, class: "datepickers", id: 'calendar', placeholder: "Anytime" %>
+      </div>
+      <div class="input-field col s12 l3">
+        <%= select_tag :seat, '<option value="4">1 to 4 guests</option><option value="7">5 to 7 guests</option><option value="12">8 to 12 guests</option>'.html_safe, class: 'home-form' %>
+      </div>
+      <div class="col l2">
+        <%= submit_tag 'Go Search', class: 'btn waves-light' %>
       </div>
     </div>
-    <div class="input-field col s12">
-      Pricing (MYR):
-      <div id="html5"></div>
-      <input type="number" class="col s4 number-input" name="lower" min="500" max="2500" step="1" id="lower">
-      <div class="col s4 to">To</div>
-      <input type="number" class="col s4 number-input" name="higher" min="500" max="2500" step="1" id="higher">
-    </div>
-    <div class="col s12">
-      <%= submit_tag 'Go Search', class: 'btn waves-light' %>
-    </div>
-    <% end %>
   </div>
-</div>
-<div class="col l2"></div>
+<% end %>
