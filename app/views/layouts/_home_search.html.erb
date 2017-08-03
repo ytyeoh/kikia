@@ -1,0 +1,21 @@
+<div class="kk hide-on-small-only">
+<%= form_tag listings_path, method: :get do %>
+  <div class="col s12 border1px searchi">
+    <div class="row">
+      <div class="input-field col s12 l4">
+        <%= select_tag :package, options_for_select(Listing.packages.map {|k, v| [k.humanize.capitalize.split.map(&:capitalize)*' ', v]}), class: 'home-form' %>
+      </div>
+      <div class="input-field col s12 l3">
+        <i class="fa fa-calendar fa-1 prefix" aria-hidden="true"></i>
+        <%= text_field_tag 'time_end', nil, class: "datepickers", id: 'calendar', placeholder: "Anytime" %>
+      </div>
+      <div class="input-field col s12 l3">
+        <%= select_tag :seat, '<option value="4">1 to 4 guests</option><option value="7">5 to 7 guests</option><option value="12">8 to 12 guests</option>'.html_safe, class: 'home-form' %>
+      </div>
+      <div class="col l2">
+        <%= submit_tag 'Go Search', class: 'btn waves-light' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

@@ -2,9 +2,50 @@ nav{
   background-color: transparent !important;
   border-bottom: 1px solid #e4e4e4 !important;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1) !important;
+  
 
+  .kk{
+    margin-top: 5px;
+    max-height: 50px;
+    width: 70%;
+    position: absolute;
+    display: block;
+    left:200px;
+    line-height: 30px!important;
+
+    .searchi{
+      padding: 5px!important;
+    /*  margin: 2rem 0;*/
+      .row{
+        margin-bottom: 0px;
+        
+        .input-field .prefix{
+          color:black;
+          top: -15px;
+          font-size: 1rem;          
+
+        }
+        .select-dropdown{
+          /*height:2rem;*/
+        }
+        .datepickers{
+          /*height:2rem;*/
+        }
+
+        input[type=text]{
+          border:0;
+          margin-bottom: 0px;
+          text-align: center;
+          color: black;
+        }
+      }
+    }
+  }
 }
 
+.tabs.tabs-transparent .indicator {
+    background-color: $primary-color!important;
+}
 
 nav a{
   color: $primary-color !important;

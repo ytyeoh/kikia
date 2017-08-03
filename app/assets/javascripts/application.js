@@ -34,6 +34,12 @@ $(document).ready(function(){
     menuWidth: 200,
     closeOnClick: true
   });
+  $(".button-left-collapse").sideNav({
+    edge: 'left',
+    menuWidth: 200,
+    closeOnClick: true
+  });
+  $("#mobile-demo").removeClass('right-aligned');
   Materialize.updateTextFields();
   $('select').material_select();
   $('.modal').modal();

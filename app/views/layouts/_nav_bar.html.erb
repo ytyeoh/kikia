@@ -1,38 +1,19 @@
 <nav class="nav-extended">
   <div class="nav-wrapper">
-    <%= link_to image_tag('logo.png'), root_path, class: "left brand-logo margin-left2rem" %>
-    <a href="#" data-activates="mobile-demo" class="right button-collapse show-on-large margin-right2rem"><i class="material-icons">menu</i></a>
+    <a href="#" data-activates="mobile-demo" class="left button-left-collapse show-on-small hide-on-med-and-up margin-0"><%= image_tag('logo.png', class: "left brand-logo") %></a>
+    <%= render 'layouts/mobile_bar' %>
+    <%= link_to image_tag('logo.png'), root_path, class: "left brand-logo margin-left2rem hide-on-small-only" %>
+    <%= render 'layouts/home_search' %>
+    <a href="#" data-activates="desktop-demo" class="right button-collapse hide-on-small-only show-on-medium-and-up margin-right2rem"><i class="material-icons">menu</i></a>
 
-    <ul class="side-nav" id="mobile-demo">
-      <% if user_signed_in? %>
-        <li>
-          <%= render 'layouts/user_info' %>
-        </li>
-        <li><%= link_to 'Listing', owner_listings_path, 'data-no-turbolink' => true %></li>
-        <li><%= link_to 'Favorite', fav_listings_path %></li>
-        <li><%= link_to 'Booking History', invoices_path, 'data-no-turbolink' => true %></li>
-        <li><%= link_to 'Profile', edit_user_path(current_user.id) %></li>
-        <% if current_user.is_admin? %>
-          <li><%= link_to 'All User', users_path %></li>
-        <% end %>
-        <li><a href="#!">Close</a></li>
-        <li class='menu-li'><%= link_to "Log Out", destroy_user_session_path, :method => :delete %></li>
-      <% else %>
-        <li><%= link_to 'Sign in', new_user_session_path %></li>
-        <li><%= link_to 'Sign up', new_user_registration_path %></li>
-      <% end %>
-      <li><%= link_to 'Blog', blogs_path, 'data-no-turbolink' => true %></li>
-    </ul>
-  </div>
-  <div class="navwrapper">
-    dsfsdfsdf
+    <%= render 'layouts/menu_bar' %>
   </div>
   <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-        <li class="tab"><a href="#test1">Test 1</a></li>
-        <li class="tab"><a class="active" href="#test2">Test 2</a></li>
-        <li class="tab disabled"><a href="#test3">Disabled Tab</a></li>
-        <li class="tab"><a href="#test4">Test 4</a></li>
+      <ul class="tabs tabs-transparent">        
+        <li class="tab"><%= link_to 'FOR YOU', root_path, class: active_class(root_path), target: "_self"  %></li>
+        <li class="tab"><%= link_to 'Driver', listings_path, class: active_class(listings_path), target: "_self"  %></li>
+        <li class="tab"><a class="<%= active_class(users_path) %>" href="#test2">Test 2</a></li>
+        <li class="tab"><a class="<%= active_class(users_path) %>" href="#test3">Disabled Tab</a></li>
       </ul>
     </div>
 </nav>
