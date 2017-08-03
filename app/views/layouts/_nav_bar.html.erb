@@ -18,7 +18,7 @@
     </ul>
   </div>
   <div class="nav-content">
-      <ul class="tabs tabs-transparent">        
+      <ul class="tabs tabs-transparent <%= hide_class(root_path, listings_path) %>">
         <li class="tab"><%= link_to 'FOR YOU', root_path, class: active_class(root_path), target: "_self"  %></li>
         <li class="tab"><%= link_to 'Driver', listings_path, class: active_class(listings_path), target: "_self"  %></li>
         <li class="tab"><a class="<%= active_class(users_path) %>" href="#test2">Test 2</a></li>
