@@ -1,12 +1,21 @@
 <nav class="nav-extended">
   <div class="nav-wrapper">
-    <a href="#" data-activates="mobile-demo" class="left button-left-collapse show-on-small hide-on-med-and-up margin-0"><%= image_tag('logo.png', class: "left brand-logo") %></a>
-    <%= render 'layouts/mobile_bar' %>
-    <%= link_to image_tag('logo.png'), root_path, class: "left brand-logo margin-left2rem hide-on-small-only" %>
-    <%= render 'layouts/home_search' %>
-    <a href="#" data-activates="desktop-demo" class="right button-collapse hide-on-small-only show-on-medium-and-up margin-right2rem"><i class="material-icons">menu</i></a>
-
-    <%= render 'layouts/menu_bar' %>
+    <a href="#" data-activates="mobile-demo" class="left button-left-collapse show-on-medium-and-down hide-on-med-and-up margin-0"><%= image_tag('logo.png', class: "left brand-logo responsive-img") %></a>
+    <ul class="side-nav right" id="mobile-demo">
+      <%= render 'layouts/menu_bar' %>
+    </ul>
+    <%= link_to image_tag('logo.png'), root_path, class: "left brand-logo margin-left2rem hide-on-med-and-down" %>
+    <span class='hide-on-med-and-down show-on-large'>
+      <%= render 'layouts/home_search' %>
+    </span>
+    <span class="show-on-medium-and-down hide-on-med-and-up">
+      <%= render 'layouts/mobile_search' %>
+    </span>
+    
+    <a href="#" data-activates="desktop-demo" class="right button-collapse hide-on-med-and-down show-on-large margin-right2rem"><i class="material-icons">menu</i></a>
+    <ul class="side-nav" id="desktop-demo">
+      <%= render 'layouts/menu_bar' %>
+    </ul>
   </div>
   <div class="nav-content">
       <ul class="tabs tabs-transparent">        

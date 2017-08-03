@@ -28,6 +28,21 @@
 
 $(document).ready(function(){
   globalEvent.initialize();
+  $('.home-form, #calendar1').on('click', function(event) {
+    event.stopPropagation();
+  });
+
+  $('.msearch').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'right', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: true // Stops event propagation
+    }
+  );
   $('.close').sideNav('hide');
   $(".button-collapse").sideNav({
     edge: 'right',
@@ -59,7 +74,7 @@ $(document).ready(function(){
   var yesterday = new Date((new Date()).valueOf()+3000*60*60*24);
 
   // var day = booking_day.splice(0, -1, { from: [0,0,0], to: yesterday });
-  $('#calendar').pickadate(
+  $('#calendar, #calendar1').pickadate(
     {
     disable: [{ from: [0,0,0], to: yesterday }],
     onSet: function( arg ){
