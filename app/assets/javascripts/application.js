@@ -85,6 +85,17 @@ $(document).ready(function(){
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
+  $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+  $('#star').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
 });
 
 function showalert(){

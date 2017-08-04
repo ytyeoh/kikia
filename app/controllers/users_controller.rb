@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @review = Review.new
     @reviews = Review.where(user_id:params[:id])
     @user_credit = UserCredit.where(user_id: current_user)
   end

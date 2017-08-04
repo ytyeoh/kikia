@@ -33,6 +33,7 @@
         <%= render 'auto_bump' %>
         <%= render 'highlight' %>
         <%= render 'bump' %>
+        <%= render 'review_form' %>
         <% if @listing.published_at > 1.day.ago %>
           <p>About <%= ((@listing.published_at + 1.day - Time.now )/3600).round %> hour to bump again<p>
         <%end%>
