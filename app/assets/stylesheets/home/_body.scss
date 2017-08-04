@@ -7,6 +7,14 @@
   box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.08) !important;
 }
 
+.table{
+  display: table;
+  table-layout: fixed;
+}
+.table-cell{
+  display: table-cell;
+}
+
 .search{
   padding: 10px!important;
   margin: 2rem 0;
@@ -22,6 +30,9 @@
 }
 
 .home{
+  font-size: 15px;
+  word-wrap: break-word;
+
   .home-form{
     width: 100%;
   }
