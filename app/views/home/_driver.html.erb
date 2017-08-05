@@ -1,16 +1,17 @@
 <div class="col s12 l3">
     <div class="row">
-      <div class="col s12">
-        <%= image_tag driver.user.image.url(:medium) %>
+      <div class="col s12 center-align">
+        <%= image_tag driver.user.image.url(:medium), class:'responsive-img' %>
       </div>
       <div class="col s12">
-        <b><%= driver.price %></b><%= driver.user.name %>sdfrgresdfvgergvvgbervgrcvsdruhcujsdejjkdbsj
+        <b><%= driver.price %></b><%= driver.user.name %>
       </div>
       <div class="col s12">
-        
+        5 years experience
       </div>
-      <div class="col s12">
-        star
+      <div class="col s12 table">
+        <div class="star-rating table-cell" data-score=<%= driver.reviews.average(:rating) %>></div>
+        <div class="table-cell"><%= driver.reviews.count %> reviews</div>
       </div>
     </div>
 
