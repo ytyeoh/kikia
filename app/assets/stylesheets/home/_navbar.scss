@@ -1,3 +1,77 @@
+nav{
+  background-color: transparent !important;
+  border-bottom: 1px solid #e4e4e4 !important;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1) !important;
+  
+  .dropdown-content{
+    color:black;
+    padding-bottom: 10rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    #close{
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+      color: black;
+    }
+  }
+  .msearch{
+    color: #484848 !important;
+    background-color: white;
+    margin: 5px;
+
+    i{
+      line-height: 36px!important;
+    }
+  }
+
+  .kk{
+    margin-top: 5px;
+    max-height: 50px;
+    width: 70%;
+    position: absolute;
+    display: block;
+    left:200px;
+    line-height: 30px!important;
+
+    .searchi{
+      padding: 5px!important;
+    /*  margin: 2rem 0;*/
+      .row{
+        margin-bottom: 0px;
+        
+        .input-field .prefix{
+          color:black;
+          top: -15px;
+          font-size: 1rem;          
+
+        }
+        .select-dropdown{
+          /*height:2rem;*/
+        }
+        .datepickers{
+          /*height:2rem;*/
+        }
+
+        input[type=text]{
+          border:0;
+          margin-bottom: 0px;
+          text-align: center;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.tabs.tabs-transparent .indicator {
+    background-color: $primary-color!important;
+}
+
+nav a{
+  color: $primary-color !important;
+}
+
 nav .brand-logo.left {
   left: 0.5rem;
   padding: 0;

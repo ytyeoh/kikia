@@ -1,0 +1,21 @@
+<div class="col s12 l3">
+  <div class="row">
+    <%= link_to listing_path(driver) do %>
+      <div class="col s12 center-align">
+        <%= image_tag driver.user.image.url(:medium), class:'responsive-img' %>
+      </div>
+    <% end %>
+    <%= link_to listing_path(driver) do %>
+      <div class="col s12">
+        <b style='padding-right: 15px;'><%= driver.price %></b><%= driver.user.name %>
+      </div>
+      <div class="col s12">
+        5 years experience
+      </div>
+      <div class="col s12 table">
+        <div class="star-rating table-cell" data-score=<%= driver.reviews.average(:rating) %>></div>
+        <div class="table-cell"><%= driver.reviews.count %> reviews</div>
+      </div>
+    <% end %>
+  </div>
+</div>

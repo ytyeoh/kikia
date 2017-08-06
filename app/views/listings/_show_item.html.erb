@@ -51,5 +51,14 @@
       <%= @listing.address %>
     </div>
   <% end %>
+  <% if @reviews %>
+    <% @reviews.each do |review| %>
+      <dt>Review:</dt>
+      <dd><%= review.comment %></dd>
+      <dt>Rate By:</dt>
+      <dd><%= review.listing.name %></dd>
+      <div class="star-rating" data-score=<%= review.rating %>></div>
+    <% end %>
+  <% end %>
 
 </div>

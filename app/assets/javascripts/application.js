@@ -28,12 +28,33 @@
 
 $(document).ready(function(){
   globalEvent.initialize();
+  $('.home-form, #calendar1').on('click', function(event) {
+    event.stopPropagation();
+  });
+
+  $('.msearch').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: false, // Displays dropdown below the button
+      alignment: 'right', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: true // Stops event propagation
+    }
+  );
   $('.close').sideNav('hide');
   $(".button-collapse").sideNav({
     edge: 'right',
     menuWidth: 200,
     closeOnClick: true
   });
+  $(".button-left-collapse").sideNav({
+    edge: 'left',
+    menuWidth: 200,
+    closeOnClick: true
+  });
+  $("#mobile-demo").removeClass('right-aligned');
   Materialize.updateTextFields();
   $('select').material_select();
   $('.modal').modal();
@@ -49,6 +70,31 @@ $(document).ready(function(){
     autoclose: true, // automatic close timepicker
     ampmclickable: true, // make AM PM clickable
     aftershow: function(){} //Function for after opening timepicker  
+  });
+  var yesterday = new Date((new Date()).valueOf()+3000*60*60*24);
+
+  // var day = booking_day.splice(0, -1, { from: [0,0,0], to: yesterday });
+  $('#calendar, #calendar1').pickadate(
+    {
+    disable: [{ from: [0,0,0], to: yesterday }],
+    onSet: function( arg ){
+        if ( 'select' in arg ){ //prevent closing on selecting month/year
+            this.close();
+        }
+    },
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  $('.star-rating').raty({
+      path: '/assets/',
+      readOnly: true,
+      score: function() {
+            return $(this).attr('data-score');
+    }
+  });
+  $('#star').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
   });
 });
 

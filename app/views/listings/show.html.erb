@@ -33,6 +33,7 @@
         <%= render 'auto_bump' %>
         <%= render 'highlight' %>
         <%= render 'bump' %>
+        <%= render 'review_form' %>
         <% if @listing.published_at > 1.day.ago %>
           <p>About <%= ((@listing.published_at + 1.day - Time.now )/3600).round %> hour to bump again<p>
         <%end%>
@@ -45,13 +46,7 @@
       <%= render 'show_item' %>
     </div>
     <div class="col l5">
-    </div>
-    <div class="col l7">
-      <div style='width: 100%;'>
-        <div id="map" style='width: 90%; height: 482px;'></div>
-      </div>
-    </div>
-    
+    </div>    
   </div>
 </div>
 <% if current_user %>

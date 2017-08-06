@@ -1,0 +1,25 @@
+<a class="msearch right waves-light btn" data-activates='dropdown1'><i class="material-icons left" >search</i>car hire / anywhere</a>
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <%= form_tag listings_path, method: :get do %>
+    <div class="row">
+      <div class="col s12">
+       <a href="#" class='left' id='close'><i class="material-icons">eject</i></a>
+      </div>
+      <div class="input-field col s12 ">
+        <%= select_tag :package, options_for_select(Listing.packages.map {|k, v| [k.humanize.capitalize.split.map(&:capitalize)*' ', v]}), class: 'home-form' %>
+      </div>
+      <div class="input-field col s12 ">
+        <i class="fa fa-calendar fa-1 prefix" aria-hidden="true"></i>
+        <%= text_field_tag 'time_end', nil, class: "datepickers", id: 'calendar1', placeholder: "Anytime" %>
+      </div>
+      <div class="input-field col s12 ">
+        <%= select_tag :seat, '<option value="4">1 to 4 guests</option><option value="7">5 to 7 guests</option><option value="12">8 to 12 guests</option>'.html_safe, class: 'home-form' %>
+      </div>
+      <div class="col s12">
+        <%= submit_tag 'Go Search', class: 'btn waves-light' %>
+      </div>
+    </div>
+
+<% end %>
+  </ul>

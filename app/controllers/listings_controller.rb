@@ -23,7 +23,11 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @review = Review.new
+    @user = current_user
     @listing = Listing.find(params[:id])
+    @reviews = Review.where(listing_id: params[:id]).order(created_at: :desc)
+    @bookings = Booking.where(listing_id: @listing, user_id: current_user)
     @a=[]
     Booking.where(driver_id: @listing.user.id).where("end_time > ?", Date.today).each do |x|
       array = []
