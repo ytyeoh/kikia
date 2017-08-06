@@ -1,0 +1,16 @@
+<% {'https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/19437301_10154475171521822_4211518406839987565_n.jpg?oh=fe4ad86e972799df4f5917c92abebbd0&oe=5A3935E6': 'Entopia', 'https://scontent-kut2-1.xx.fbcdn.net/v/t1.0-9/983610_589327977774028_1594955423_n.jpg?oh=1551c32131d650fd270285d662dfd637&oe=5A2FB052': 'Camera Museum'}.each do |image_url, place| %>
+
+<div class="col s12 l3">
+    <div class="row">
+      <div class="col s12 center-align">
+        <%= image_tag image_url, class:'responsive-img' %>
+      </div>
+      <div class="col s12">
+        <%= place %>
+      </div>
+      
+    </div>
+
+</div>
+
+<% end %>

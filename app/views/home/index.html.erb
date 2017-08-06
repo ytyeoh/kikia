@@ -6,18 +6,36 @@
           <h3>Drivers</h3>
         </div>
         <div class=" table-cell right-align">
-          se more
+          <%= link_to 'see all', listings_path %>
         </div>
       </div>
-      <div class="row">
+      <div class="row driver">
       <%= render partial: 'driver', collection: @drivers %>
       </div>
     </div>
   </div>
   <div class="col s12">
-    sdf
+    <div class="row">
+      <div class="col s12 table">
+        <div class=" table-cell left-align">
+          <h3>Places</h3>
+        </div>
+      </div>
+      <div class="row">
+      <%= render 'place' %>
+      </div>
+    </div>
   </div>
   <div class="col s12">
-    fgh
+    <div class="row">
+      <div class="col s12 table">
+        <div class=" table-cell left-align">
+          <h3>Food</h3>
+        </div>
+      </div>
+      <div class="row">
+        <%= render 'food' %>
+      </div>
+    </div>
   </div>
 </div>
